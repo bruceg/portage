@@ -79,3 +79,13 @@ pkg_postinst() {
 		fi
 	done
 }
+
+pkg_postrm() {
+	test -x /usr/bin/bcron-sched || (
+		for svc in bcron-{sched,spool,update}; do
+			if [ -L /service/$svc ]; then
+				svc-remove $svc
+			fi
+		done
+	)
+}
