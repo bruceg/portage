@@ -1,0 +1,9 @@
+# /etc/crontab
+#
+
+# check scripts in cron.hourly, cron.daily, cron.weekly and cron.monthly
+*/15 * * * * root /usr/bin/test -x /usr/sbin/run-crons && /usr/sbin/run-crons 
+0    * * * * root rm -f /var/spool/cron/lastrun/cron.hourly
+0    0 * * * root rm -f /var/spool/cron/lastrun/cron.daily
+0    0 * * 6 root rm -f /var/spool/cron/lastrun/cron.weekly
+0    0 1 * * root rm -f /var/spool/cron/lastrun/cron.monthly
