@@ -1,0 +1,24 @@
+#!/bin/bash
+set -e
+. /etc/make.conf
+PORTDIR=${PORTDIR:-/usr/portage}
+tmpfile=/tmp/clean-packages.tmp.$$
+cd ${PKGDIR:-${PORTDIR}/packages}
+
+trap 'rm -f $tmpfile' EXIT
+
+qpkg -I -v -nc \
+| cut -d' ' -f1 \
+| cut -d/ -f2 \
+| sort >$tmpfile
+
+ls -1 All \
+| sed -e 's/.tbz2$//' \
+| sort \
+| diff -u - $tmpfile \
+| tail -n +4 \
+| grep ^- \
+| cut -d- -f2- \
+| while read basename; do
+  echo $PWD/*/${basename}.tbz2
+done
