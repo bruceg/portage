@@ -10,7 +10,7 @@ SRC_URI="http://untroubled.org/cvm/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="x86 ~amd64 ~sparc ~ppc"
+KEYWORDS="x86 amd64 ~sparc ~ppc"
 IUSE="mysql postgresql"
 
 DEPEND="virtual/libc
