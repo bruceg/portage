@@ -5,7 +5,7 @@ HOMEPAGE="http://untroubled.org/bcron/"
 SRC_URI="http://untroubled.org/bcron/${P}.tar.gz"
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="x86 amd64"
+KEYWORDS="x86 amd64 sparc"
 IUSE=""
 
 DEPEND="!virtual/cron
@@ -14,6 +14,7 @@ RDEPEND="!virtual/cron
 	virtual/editor
 	virtual/mta
 	sys-apps/cronbase
+	sys-apps/ucspi-unix
 	>=supervise-scripts-3.5"
 PROVIDE="virtual/cron"
 S=${WORKDIR}/${P}
