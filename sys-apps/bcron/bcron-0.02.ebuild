@@ -13,7 +13,7 @@ DEPEND="!virtual/cron
 RDEPEND="!virtual/cron
 	virtual/editor
 	virtual/mta
-	sys-apps/cronbase
+	sys-process/cronbase
 	>=supervise-scripts-3.5"
 PROVIDE="virtual/cron"
 S=${WORKDIR}/${P}
