@@ -10,11 +10,13 @@ SRC_URI="http://untroubled.org/cvm/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="x86 ~sparc ~ppc"
-IUSE=""
+KEYWORDS="x86 ~amd64 ~sparc ~ppc"
+IUSE="mysql postgresql"
 
 DEPEND="virtual/libc
-	>=dev-libs/bglibs-1.018"
+	>=dev-libs/bglibs-1.018
+	mysql? ( dev-db/mysql )
+	postgresql? ( dev-db/postgresql )"
 RDEPEND="virtual/libc"
 
 src_unpack() {
@@ -28,10 +30,21 @@ src_compile() {
 	echo "$(gcc-getCC) ${CFLAGS}" > conf-cc
 	echo "$(gcc-getCC) -s" > conf-ld
 	make || die
+	[ `use mysql` ] && ( make mysql || die; )
+	[ `use postgresql` ] && ( make pgsql || die; )
 }
 
 src_install() {
-	dobin cvm-benchclient cvm-checkpassword cvm-pwfile cvm-testclient cvm-unix || die "dobin failed"
+	dobin cvm-benchclient cvm-checkpassword cvm-testclient \
+		cvm-pwfile cvm-unix \
+		cvm-vmailmgr cvm-vmailmgr-local cvm-vmailmgr-udp cvm-vmlookup \
+	|| die "dobin failed"
+	[ `use mysql` ] && (
+		dobin cvm-mysql cvm-mysql-local cvm-mysql-udp || die "dobin failed"
+	)
+	[ `use postgresql` ] && (
+		dobin cvm-pgsql cvm-pgsql-local cvm-pgsql-udp || die "dobin failed"
+	)
 
 	insinto /usr/include/cvm
 	doins *.h
