@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header$
 
-inherit fixheadtails
+inherit fixheadtails eutils toolchain-funcs
 
 S=${WORKDIR}/${P}
 DESCRIPTION="Bruce Guenters Libraries Collection"
@@ -21,8 +21,8 @@ src_unpack() {
 
 src_compile() {
 	echo "${D}/usr/lib/bglibs" > conf-home
-	echo "${CC} ${CFLAGS}" > conf-cc
-	echo "${CC} ${LDFLAGS}" > conf-ld
+	echo "`tc-getCC` ${CFLAGS}" > conf-cc
+	echo "`tc-getCC` ${LDFLAGS}" > conf-ld
 	# parallel builds fail badly
 	MAKEOPTS="`echo ${MAKEOPTS} | sed -re 's/-j[[:digit:]]+//g'`" \
 	emake || die
