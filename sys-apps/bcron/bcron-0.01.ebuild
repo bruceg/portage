@@ -5,7 +5,7 @@ HOMEPAGE="http://untroubled.org/bcron/"
 SRC_URI="http://untroubled.org/bcron/bcron-0.01.tar.gz"
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="x86"
+KEYWORDS="x86 amd64"
 IUSE=""
 
 DEPEND="!virtual/cron
