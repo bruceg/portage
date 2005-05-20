@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/net-libs/cvm/cvm-0.18.ebuild,v 1.5 2004/10/17 11:23:00 dholm Exp $
 
-inherit gcc
+inherit toolchain-funcs
 
 DESCRIPTION="CVM modules for unix and pwfile, plus testclient"
 HOMEPAGE="http://untroubled.org/cvm/"
@@ -27,8 +27,8 @@ src_unpack() {
 src_compile() {
 	echo "/usr/lib/bglibs/include" > conf-bgincs
 	echo "/usr/lib/bglibs/lib" > conf-bglibs
-	echo "$(gcc-getCC) ${CFLAGS}" > conf-cc
-	echo "$(gcc-getCC) -s" > conf-ld
+	echo "$(tc-getCC) ${CFLAGS}" > conf-cc
+	echo "$(tc-getCC) -s" > conf-ld
 	make || die
 	[ `use mysql` ] && ( make mysql || die; )
 	[ `use postgresql` ] && ( make pgsql || die; )
