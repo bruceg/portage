@@ -35,9 +35,10 @@ src_compile() {
 }
 
 src_install() {
-	dobin cvm-benchclient cvm-checkpassword cvm-testclient \
-		cvm-pwfile cvm-unix cvm-qmail \
+	dobin cvm-benchclient cvm-chain cvm-checkpassword \
+		cvm-pwfile cvm-qmail cvm-testclient cvm-unix \
 		cvm-vmailmgr cvm-vmailmgr-local cvm-vmailmgr-udp \
+		cvm-v1benchclient cvm-v1checkpassword cvm-v1testclient \
 	|| die "dobin failed"
 	[ `use mysql` ] && (
 		dobin cvm-mysql cvm-mysql-local cvm-mysql-udp || die "dobin failed"
