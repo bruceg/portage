@@ -13,7 +13,7 @@ SLOT="0"
 LICENSE="GPL-2"
 KEYWORDS="x86 sparc ~mips ~alpha ~ppc ~arm amd64 ~hppa"
 
-DEPEND="virtual/glibc"
+DEPEND="virtual/libc"
 
 src_unpack() {
 	unpack ${A}
