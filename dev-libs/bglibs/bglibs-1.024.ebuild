@@ -54,3 +54,13 @@ src_install () {
 	docinto latex
 	dodoc doc/latex/*
 }
+
+pkg_postinst() {
+	# Upgrading causes these symlinks to get nuked
+	if ! [ -e /usr/lib/bglibs/lib ]; then
+		ln -s . /usr/lib/bglibs/lib
+	fi
+	if ! [ -e /usr/lib/bglibs/include ]; then
+		ln -s ../../include/bglibs /usr/lib/bglibs/include
+	fi
+}
