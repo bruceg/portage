@@ -23,8 +23,8 @@ src_compile() {
 	echo /usr/lib/bglibs/include > conf-include
 	echo /usr/lib/bglibs/lib > conf-lib
 	echo /usr/bin >conf-bin
-	echo "`tc-getCC` ${CFLAGS}" > conf-cc
-	echo "`tc-getCC` ${LDFLAGS}" > conf-ld
+	echo "`tc-getCC` ${CFLAGS} -g" > conf-cc
+	echo "`tc-getCC` ${LDFLAGS} -s" > conf-ld
 	# parallel builds fail badly
 	MAKEOPTS="`echo ${MAKEOPTS} | sed -re 's/-j[[:digit:]]+//g'`" \
 	emake || die
