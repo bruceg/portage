@@ -26,8 +26,8 @@ src_unpack() {
 }
 
 src_compile() {
-	echo "/usr/lib/bglibs/include" > conf-bgincs
-	echo "/usr/lib/bglibs/lib" > conf-bglibs
+	echo "/usr/include/bglibs" > conf-bgincs
+	echo "/usr/lib/bglibs" > conf-bglibs
 	echo "$(tc-getCC) ${CFLAGS} -I/var/vpopmail/include" > conf-cc
 	echo "$(tc-getCC) -s -L/var/vpopmail/lib" > conf-ld
 	make || die

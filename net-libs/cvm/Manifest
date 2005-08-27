@@ -3,7 +3,7 @@ MD5 e26be3c87e76e5b7ac5650b82cf39124 cvm-0.50.ebuild 1797
 MD5 0eb08a505a332e492754f09a28246fbd cvm-0.60.ebuild 1866
 MD5 78ab50900524ef5ced7cdeefa9d430f0 cvm-0.70.ebuild 1866
 MD5 de1ab486d63df6c9ecf2f77381bec4cf cvm-0.71.ebuild 2072
-MD5 de1ab486d63df6c9ecf2f77381bec4cf cvm-0.75.ebuild 2072
+MD5 e687f8618863b922434d0f1677e4fcb5 cvm-0.75.ebuild 2064
 MD5 150d6cd50d6f7390a2a341606b7c66b8 files/digest-cvm-0.33 59
 MD5 914f71b09d10a53539c4cd95ba725480 files/digest-cvm-0.50 59
 MD5 9ef27a8a8ead7f2d58912acbd6804ab7 files/digest-cvm-0.60 59
