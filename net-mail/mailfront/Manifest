@@ -1,0 +1,4 @@
+MD5 b0da9a97fd74e0dc04265c406b397919 files/digest-mailfront-0.98 65
+MD5 afecfadb55bc6429264f78c445606c11 files/run-pop3front 269
+MD5 9756f7e0b1a7422fbe4e7d78d4f77512 files/run-smtpfront 461
+MD5 4d0f377534fd3ce484ba9195af9947a4 mailfront-0.98.ebuild 1623
