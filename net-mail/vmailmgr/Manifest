@@ -2,6 +2,4 @@ MD5 0279b46d6d44e209fead5769b6fdea30 files/checkvpw-loginfail 45
 MD5 2ec6f8c3f9590b44ce196a6baecb4c4b files/digest-vmailmgr-0.97 65
 MD5 3a361d677a497af106a197e48acbc129 files/separators 3
 MD5 bf55605617fc5acfdca3a28a796e82a4 files/socket-file 35
-MD5 d8e019e2a0047f70578608f16b233489 files/vmailmgr-0.96.9-gentoo-r2.patch 4939
-MD5 106e71c406367cc524e732c7e0b70749 files/vmailmgr-0.96.9-gentoo-r3.patch 5109
 MD5 a286c999ad89e4a8c99a0172fe4afc98 vmailmgr-0.97.ebuild 1495
