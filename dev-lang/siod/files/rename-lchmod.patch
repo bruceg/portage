@@ -1,0 +1,21 @@
+diff -u siod/slibu.c siod/slibu.c
+--- siod/slibu.c	2001-07-25 13:27:22.000000000 -0600
++++ siod/slibu.c	2005-11-17 14:03:54.000000000 -0600
+@@ -1028,7 +1028,7 @@
+ 
+ #if defined(unix) || defined(WIN32)
+ 
+-LISP lchmod(LISP path,LISP mode)
++LISP l_chmod(LISP path,LISP mode)
+ {if (chmod(get_c_string(path),get_c_long(mode)))
+    return(err("chmod",llast_c_errmsg(-1)));
+  else
+@@ -2188,7 +2188,7 @@
+ 	      opendir_gc_free,
+ 	      &j);
+  set_print_hooks(tc_opendir,opendir_prin1);
+- init_subr_2("chmod",lchmod);
++ init_subr_2("chmod",l_chmod);
+ #endif
+ 
+  gc_protect_sym(&sym_channels,"*channels*");
