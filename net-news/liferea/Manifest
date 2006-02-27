@@ -1,5 +1,7 @@
 MD5 37c387ccaa51e5a141bbf43c714a0b76 files/digest-liferea-1.0.1 66
 MD5 21e442128b3ee664aeec1d24f5a42db5 files/digest-liferea-1.0.3 66
+MD5 b3e927c61d26a74ef43f7a6f56f1a778 files/digest-liferea-1.0.6 66
 MD5 86662e7c1f5a7d08669b0d6c729de55a files/liferea-firefox-1.5.patch 650
 MD5 510bc5e595c04c4721c146c5aaa3865c liferea-1.0.1.ebuild 1854
 MD5 510bc5e595c04c4721c146c5aaa3865c liferea-1.0.3.ebuild 1854
+MD5 510bc5e595c04c4721c146c5aaa3865c liferea-1.0.6.ebuild 1854
