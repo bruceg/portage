@@ -1,0 +1,16 @@
+--- libtommath-0.38/makefile.shared.orig	2006-01-25 22:05:48.000000000 -0600
++++ libtommath-0.38/makefile.shared	2006-03-04 13:17:05.000000000 -0600
+@@ -83,10 +83,11 @@
+ objs: $(OBJECTS)
+ 
+ $(LIBNAME):  $(OBJECTS)
+-	libtool --mode=link gcc *.lo -o $(LIBNAME) -rpath $(LIBPATH) -version-info $(VERSION)
++	libtool --mode=link --tag=CC gcc *.lo -o $(LIBNAME) -rpath $(LIBPATH) -version-info $(VERSION)
+ 
+ install: $(LIBNAME)
+-	libtool --mode=install install -c $(LIBNAME) $(LIBPATH)/$(LIBNAME)
++	install -d -g $(GROUP) -o $(USER) $(DESTDIR)$(LIBPATH)
++	libtool --mode=install install -c $(LIBNAME) $(DESTDIR)$(LIBPATH)/$(LIBNAME)
+ 	install -d -g $(GROUP) -o $(USER) $(DESTDIR)$(INCPATH)
+ 	install -g $(GROUP) -o $(USER) $(HEADERS) $(DESTDIR)$(INCPATH)
+ 

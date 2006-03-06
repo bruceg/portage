@@ -1,0 +1,30 @@
+--- libtomcrypt-1.10/testprof/makefile.shared.orig	2006-02-11 03:18:16.000000000 -0600
++++ libtomcrypt-1.10/testprof/makefile.shared	2006-03-04 13:38:59.000000000 -0600
+@@ -18,7 +18,7 @@
+ default: $(LIBTEST)
+ 
+ $(LIBTEST): $(OBJECTS)
+-	libtool --silent --mode=link gcc $(CFLAGS) `find . -type f | grep "[.]lo" |  xargs` -o $@ -rpath $(LIBPATH) -version-info $(VERSION)
++	libtool --silent --mode=link --tag=CC gcc $(CFLAGS) `find . -type f | grep "[.]lo" |  xargs` -o $@ -rpath $(LIBPATH) -version-info $(VERSION)
+ 
+ install: $(LIBTEST)
+-	libtool --silent --mode=install install -c $(LIBTEST) $(LIBPATH)/$(LIBTEST)
++	libtool --silent --mode=install install -c $(LIBTEST) $(DESTDIR)$(LIBPATH)/$(LIBTEST)
+--- libtomcrypt-1.10/makefile.shared.orig	2006-02-11 03:18:16.000000000 -0600
++++ libtomcrypt-1.10/makefile.shared	2006-03-04 13:39:13.000000000 -0600
+@@ -230,11 +230,12 @@
+ objs: $(OBJECTS)
+ 
+ $(LIBNAME): $(OBJECTS) testprof/$(LIBTEST)
+-	libtool --silent --mode=link gcc $(CFLAGS) `find . -type f | grep "[.]lo" | grep "src/" | xargs` $(EXTRALIBS) -o $(LIBNAME) -rpath $(LIBPATH) -version-info $(VERSION)
++	libtool --silent --mode=link --tag=CC gcc $(CFLAGS) `find . -type f | grep "[.]lo" | grep "src/" | xargs` $(EXTRALIBS) -o $(LIBNAME) -rpath $(LIBPATH) -version-info $(VERSION)
+ 
+ install: $(LIBNAME)
+-	cd testprof ; CFLAGS="$(CFLAGS)" GROUP=$(GROUP) USER=$(USER) VERSION=$(VERSION) LIBPATH=$(LIBPATH) LIBTEST=$(LIBTEST) LIBTEST_S=$(LIBTEST_S) make -f makefile.shared install
+-	libtool --silent --mode=install install -c libtomcrypt.la $(LIBPATH)/libtomcrypt.la
++	install -d -g $(GROUP) -o $(USER) $(DESTDIR)$(LIBPATH)
++	cd testprof ; CFLAGS="$(CFLAGS)" GROUP=$(GROUP) USER=$(USER) VERSION=$(VERSION) LIBPATH=$(LIBPATH) LIBTEST=$(LIBTEST) LIBTEST_S=$(LIBTEST_S) DESTDIR=$(DESTDIR) make -f makefile.shared install
++	libtool --silent --mode=install install -c $(LIBNAME) $(DESTDIR)$(LIBPATH)/$(LIBNAME)
+ 	install -d -g $(GROUP) -o $(USER) $(DESTDIR)$(INCPATH)
+ 	install -g $(GROUP) -o $(USER) $(HEADERS) $(DESTDIR)$(INCPATH)
+ 
