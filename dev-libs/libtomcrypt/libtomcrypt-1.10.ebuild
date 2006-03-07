@@ -10,7 +10,7 @@ SRC_URI="http://libtomcrypt.org/files/crypt-${PV}.tar.bz2"
 
 LICENSE="public-domain"
 SLOT="0"
-KEYWORDS="~amd64 ~ppc ~x86"
+KEYWORDS="amd64 ~ppc x86"
 IUSE="doc libtommath tomsfastmath"
 
 RDEPEND="libtommath? ( dev-libs/libtommath )

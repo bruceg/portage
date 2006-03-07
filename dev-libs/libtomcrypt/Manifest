@@ -1,3 +1,3 @@
 MD5 6749bae316ecd9fb2e52e0b49c01b0ab files/digest-libtomcrypt-1.10 64
 MD5 3e0f8337a67d4d1b2c89da3d458f1108 files/libtomcrypt-1.10-shared-lib.patch 2033
-MD5 dfe3d58fe969a9f147e468431cfcca9f libtomcrypt-1.10.ebuild 1290
+MD5 48551b815417bbb91b094da78628249e libtomcrypt-1.10.ebuild 1288
