@@ -7,6 +7,7 @@ MD5 8a6528c96093da5a712d901bd655418a bglibs-1.027.ebuild 1592
 MD5 2a4e89ce3cb4b85308277030336d6a8c bglibs-1.028.ebuild 1600
 MD5 2a4e89ce3cb4b85308277030336d6a8c bglibs-1.031.ebuild 1600
 MD5 70d00b77cf4e6e94c1fb6ad4abe3fce5 bglibs-1.040.ebuild 1631
+MD5 70d00b77cf4e6e94c1fb6ad4abe3fce5 bglibs-1.041.ebuild 1631
 MD5 8c9e81780e348b2d88639640431cafb9 files/digest-bglibs-1.019 64
 MD5 fab7c04c8f9b7918269c61ba7630bfc4 files/digest-bglibs-1.020 64
 MD5 4cb601e653471e3c2cf6f28d3c26d008 files/digest-bglibs-1.021 64
@@ -16,3 +17,4 @@ MD5 38552c107aed3843e3874610791d813a files/digest-bglibs-1.027 64
 MD5 623ce6046d8180d53ab4e8f8e4bb0df9 files/digest-bglibs-1.028 64
 MD5 5a68518177325a5df04f79225377b6c9 files/digest-bglibs-1.031 64
 MD5 cffea947a8199ada3259dfe08e639f65 files/digest-bglibs-1.040 64
+MD5 5c3b1a29003abcb7d6006f4eb650a6db files/digest-bglibs-1.041 64
