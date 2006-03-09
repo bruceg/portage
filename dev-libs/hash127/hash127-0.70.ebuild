@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header$
 
-inherit fixheadtails
+inherit fixheadtails toolchain-funcs
 
 #S=${WORKDIR}/${P}
 DESCRIPTION="Bruce Guenters Libraries Collection"
@@ -25,8 +25,8 @@ src_unpack() {
 
 src_compile() {
 	echo "${D}/usr" > conf-home
-	echo "${CC} ${CFLAGS} -fPIC" >conf-cc
-	echo "${CC} ${CFLAGS}" >conf-ld
+	echo "$(tc-getCC) ${CFLAGS} -fPIC" >conf-cc
+	echo "$(tc-getCC) ${CFLAGS}" >conf-ld
 	emake || die
 	./accuracy >accuracy.out
 	cmp accuracy.exp accuracy.out
