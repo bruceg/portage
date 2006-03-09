@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header$
 
-inherit fixheadtails
+inherit fixheadtails toolchain-funcs
 
 S=${WORKDIR}/math/${P}/src
 DESCRIPTION="Bruce Guenters Libraries Collection"
@@ -28,8 +28,8 @@ src_compile() {
 	echo "${D}/usr" > conf-home
 	# FIXME: compiler doesn't work with anything else
 	echo "idea64" >conf-opt
-	echo "${CC} ${CFLAGS} -fPIC" >conf-cc
-	echo "${CC} ${CFLAGS}" >conf-ld
+	echo "$(tc-getCC) ${CFLAGS} -fPIC" >conf-cc
+	echo "$(tc-getCC) ${CFLAGS}" >conf-ld
 	emake || die
 	solib=libnistp224.so.${PV}
 	gcc -shared -Wl,-soname,${solib} -o ${solib} `ar t nistp224.a`
