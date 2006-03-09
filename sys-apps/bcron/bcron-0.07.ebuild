@@ -1,8 +1,8 @@
-inherit eutils
+inherit eutils toolchain-funcs
 
 DESCRIPTION="Bruce's Cron System"
 HOMEPAGE="http://untroubled.org/bcron/"
-SRC_URI="http://untroubled.org/bcron/${P}.tar.gz"
+SRC_URI="http://untroubled.org/bcron/archive/${P}.tar.gz"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="x86 amd64 sparc"
@@ -20,8 +20,8 @@ PROVIDE="virtual/cron"
 S=${WORKDIR}/${P}
 
 src_compile() {
-	echo "${CC} ${CFLAGS}" >conf-cc
-	echo "${CC} ${LDFLAGS}" >conf-ld
+	echo "$(tc-getCC) ${CFLAGS}" >conf-cc
+	echo "$(tc-getCC) ${LDFLAGS}" >conf-ld
 	echo /usr/lib/bglibs/include >conf-bgincs
 	echo /usr/lib/bglibs/lib >conf-bglibs
 	emake programs || die "compile problem"
