@@ -1,0 +1,9 @@
+#!/bin/sh
+PATH="/usr/local/bin:$PATH"
+if svstat /service/klogd | grep '^/service/klogd: up ' >/dev/null 2>&1
+then
+  kill -USR1 `svstat /service/klogd | \
+              sed -e '/: up /!d' -e 's/^.* up (pid //' -e 's/).*$//'`
+else
+  echo "$0: klogd is not running."
+fi

@@ -1,0 +1,2 @@
+#!/bin/sh
+exec setuidgid kernelog multilog t /var/log/kernel
