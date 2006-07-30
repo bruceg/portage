@@ -15,11 +15,12 @@ IUSE="mysql postgresql vpopmail"
 
 DEPEND="virtual/libc
 	sys-devel/libtool
-	>=dev-libs/bglibs-1.027
+	>=dev-libs/bglibs-1.100
 	mysql? ( dev-db/mysql )
 	postgresql? ( dev-db/postgresql )
 	vpopmail? ( net-mail/vpopmail )"
-RDEPEND="virtual/libc"
+RDEPEND="virtual/libc
+	>=dev-libs/bglibs-1.100"
 
 src_compile() {
 	echo "/usr/include/bglibs" > conf-bgincs
