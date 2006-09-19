@@ -1,0 +1,39 @@
+diff -ur nistp224-0.75-orig/src/opt-idea64.c nistp224-0.75/src/opt-idea64.c
+--- nistp224-0.75-orig/src/opt-idea64.c	2001-10-18 14:39:19.000000000 -0600
++++ nistp224-0.75/src/opt-idea64.c	2006-09-19 13:14:54.000000000 -0600
+@@ -2,7 +2,8 @@
+ 
+ static void fpmode(void)
+ {
+-  asm volatile("fldcw %0"::"m"(0x137f));
++  unsigned int x = 0x137f;
++  asm volatile("fldcw %0"::"m"(x));
+ }
+ 
+ #define T0 1.0
+diff -ur nistp224-0.75-orig/src/opt-pentium.c nistp224-0.75/src/opt-pentium.c
+--- nistp224-0.75-orig/src/opt-pentium.c	2001-10-18 14:39:19.000000000 -0600
++++ nistp224-0.75/src/opt-pentium.c	2006-09-19 13:14:58.000000000 -0600
+@@ -129,7 +129,8 @@
+ 
+ static inline void fpmode(void)
+ {
+-  asm volatile("fldcw %0"::"m"(0x137f));
++  unsigned int x = 0x137f;
++  asm volatile("fldcw %0"::"m"(x));
+ }
+ 
+ static void p_sqrt(double out[8],const double in[8])
+diff -ur nistp224-0.75-orig/src/opt-ppro.c nistp224-0.75/src/opt-ppro.c
+--- nistp224-0.75-orig/src/opt-ppro.c	2001-10-18 14:39:19.000000000 -0600
++++ nistp224-0.75/src/opt-ppro.c	2006-09-19 13:15:00.000000000 -0600
+@@ -120,7 +120,8 @@
+ 
+ static inline void fpmode(void)
+ {
+-  asm volatile("fldcw %0"::"m"(0x137f));
++  unsigned int x = 0x137f;
++  asm volatile("fldcw %0"::"m"(x));
+ }
+ 
+ static void p_sqrt(double out[8],const double in[8])
