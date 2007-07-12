@@ -11,10 +11,10 @@ LICENSE="GPL-2"
 KEYWORDS="x86 amd64"
 HOMEPAGE="http://untroubled.org/srlog2/"
 RDEPEND="virtual/libc
-	>=libtomcrypt-1.03
-	>=nistp224-0.75"
+	>=dev-libs/libtomcrypt-1.03
+	>=dev-libs/nistp224-0.75"
 DEPEND="${RDEPEND}
-	>=bglibs-1.041"
+	>=dev-libs/bglibs-1.041"
 
 
 PROVIDE=""
