@@ -15,7 +15,7 @@ RDEPEND="!virtual/cron
 	virtual/mta
 	sys-process/cronbase
 	sys-apps/ucspi-unix
-	>=supervise-scripts-3.5"
+	>=sys-process/supervise-scripts-3.5"
 PROVIDE="virtual/cron"
 S=${WORKDIR}/${P}
 
