@@ -32,13 +32,16 @@ src_unpack() {
 		Makefile || die "sed CFLAGS"
 }
 
+pkg_setup() {
+	enewgroup kernelog || die "Problem adding kernelog group"
+	enewuser kernelog -1 -1 /dev/null kernelog || die "Problem adding kernelog user"
+}
+
 src_compile() {
 	emake klogd LDFLAGS="" || die
 }
 
 src_install() {
-	enewuser kernelog
-
 	dosbin klogd
 	dobin "${FILESDIR}/klogd-reload"
 	doman klogd.8
@@ -57,7 +60,7 @@ src_install() {
 
 pkg_preinst() {
 	enewgroup kernelog || die "Problem adding kernelog group"
-	enewuser kernelog -1 /bin/false /dev/null kernelog || die "Problem adding kernelog user"
+	enewuser kernelog -1 -1 /dev/null kernelog || die "Problem adding kernelog user"
 }
 
 pkg_postinst() {
