@@ -14,17 +14,19 @@ KEYWORDS="x86 ~sparc ~ppc"
 IUSE=""
 
 DEPEND="virtual/libc
-	>=dev-libs/bglibs-1.028"
-RDEPEND="mail-mta/qmail
-	 net-libs/cvm"
+	>=dev-libs/bglibs-1.101"
+RDEPEND="net-libs/cvm"
 
 src_compile() {
 	echo "/usr/lib/bglibs/include" > conf-bgincs
 	echo "/usr/lib/bglibs/lib" > conf-bglibs
 	echo "/usr/bin" > conf-bin
 	echo "/var/qmail" > conf-qmail
+	echo "/usr/include" >conf-include
+	echo "/usr/lib/mailfront" >conf-modules
 	echo "$(tc-getCC) ${CFLAGS}" > conf-cc
-	echo "$(tc-getCC) -s" > conf-ld
+	echo "$(tc-getCC)" > conf-ld
+	echo "$(tc-getCC) -fPIC -shared" >conf-ccso
 	make || die
 }
 
