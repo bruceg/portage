@@ -4,9 +4,7 @@
 
 inherit toolchain-funcs
 
-DESCRIPTION="This project is a C++ library which allows incorporating DKIM into
-an existing MTA or other application. It provides full support for signing,
-verifying, and SSP. It is compliant with RFC 4871."
+DESCRIPTION="A C/C++ library for DomainKeys Identified Mail"
 HOMEPAGE="http://sourceforge.net/projects/libdkim/"
 SRC_URI="mirror://sourceforge/libdkim/libdkim-${PV}.zip"
 
