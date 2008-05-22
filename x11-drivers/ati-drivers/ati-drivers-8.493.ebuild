@@ -1,6 +1,6 @@
 # Copyright 1999-2008 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-drivers/ati-drivers/ati-drivers-8.452.ebuild,v 1.2 2008/01/30 15:21:46 je_fro Exp $
+# $Header: /var/cvsroot/gentoo-x86/x11-drivers/ati-drivers/ati-drivers-8.476.ebuild,v 1.1 2008/04/26 10:50:46 lu_zero Exp $
 
 IUSE="acpi debug"
 
@@ -9,7 +9,7 @@ inherit eutils multilib linux-mod toolchain-funcs versionator
 DESCRIPTION="Ati precompiled drivers for recent chipsets"
 HOMEPAGE="http://www.ati.com"
 ATI_URL="https://a248.e.akamai.net/f/674/9206/0/www2.ati.com/drivers/linux/"
-SRC_URI="${ATI_URL}/ati-driver-installer-8-02-x86.x86_64.run"
+SRC_URI="${ATI_URL}/ati-driver-installer-8-5-x86.x86_64.run"
 
 LICENSE="AMD GPL-2 QPL-1.0 as-is"
 KEYWORDS="~amd64 ~x86"
@@ -20,7 +20,6 @@ RDEPEND="x11-base/xorg-server
 	!x11-apps/ati-drivers-extra
 	>=app-admin/eselect-1.0.9
 	app-admin/eselect-opengl
-	=virtual/libstdc++-3.3*
 	amd64? ( app-emulation/emul-linux-x86-xlibs )
 	acpi? (
 		x11-apps/xauth
@@ -31,7 +30,8 @@ RDEPEND="x11-base/xorg-server
 
 DEPEND="${RDEPEND}
 	x11-proto/xf86miscproto
-	x11-proto/xf86vidmodeproto"
+	x11-proto/xf86vidmodeproto
+	x11-proto/inputproto"
 
 EMULTILIB_PKG="true"
 
@@ -71,6 +71,10 @@ pkg_setup() {
 	if ! kernel_is 2 6; then
 		eerror "Need a 2.6 kernel to compile against!"
 		die "Need a 2.6 kernel to compile against!"
+	fi
+
+	if kernel_is ge 2 6 25; then
+		die "${P} is not compatible with kernel 2.6.25 and greater"
 	fi
 
 	if kernel_is ge 2 6 24 && ! linux_chkconfig_present PCI_LEGACY; then
@@ -140,9 +144,8 @@ src_unpack() {
 
 	if use acpi; then
 		sed -i \
-			-e "s:/var/lib/xdm/authdir/:/etc/X11/xdm/authdir/:" \
+			-e "s:/var/lib/xdm/authdir/authfiles/:/var/run/xauth/:" \
 			-e "s:/var/lib/gdm/:/var/gdm/:" \
-			-e "s/#ffff#/#ffff##:.*MIT-MAGIC-COOKIE/" \
 			"${S}/common/etc/ati/authatieventsd.sh" \
 			|| die "sed failed."
 
@@ -316,7 +319,7 @@ src_install() {
 	insinto /usr/share/pixmaps
 	doins common/usr/share/icons/ccc_{large,small}.xpm
 	make_desktop_entry amdcccle 'ATI Catalyst Control Center' \
-		ccc_large.xpm System
+		ccc_large System
 
 	# doc.
 	dohtml -r common/usr/share/doc/fglrx
