@@ -4,17 +4,13 @@
 
 inherit eutils toolchain-funcs
 
-PB=ezmlm-idx
-EZMLM_P=ezmlm-0.53
 IUSE="postgres mysql"
 
-S2=${WORKDIR}/${PB}-${PV}
-S=${WORKDIR}/${EZMLM_P}
 DESCRIPTION="Simple yet powerful mailing list manager for qmail."
-SRC_URI="http://www.ezmlm.org/archive/${PV}/${PB}-${PV}.tar.gz http://cr.yp.to/software/${EZMLM_P}.tar.gz"
+SRC_URI="http://www.ezmlm.org/archive/${PV}/${P}.tar.gz"
 HOMEPAGE="http://www.ezmlm.org"
 SLOT="0"
-LICENSE="as-is"
+LICENSE="GPLv2"
 KEYWORDS="x86 ~alpha ~hppa ~amd64 ~ppc ~mips ~sparc"
 DEPEND="sys-apps/grep sys-apps/groff
 	mysql? ( dev-db/mysql )
@@ -23,11 +19,7 @@ RDEPEND="virtual/qmail"
 
 src_unpack() {
 	unpack ${A}
-	cd ${S2}
-	mv ${S2}/* ${S} || die
-
 	cd ${S}
-	patch < idx.patch || die
 	echo "/usr/bin" > conf-bin
 	echo "/usr/lib/ezmlm" > conf-lib
 	echo "/usr/share/man" > conf-man
@@ -58,4 +50,5 @@ src_install () {
 
 	# Bug #47668 -- need to install ezmlm-cgi
 	dobin ezmlm-cgi
+
 }
