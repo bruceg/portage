@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-inherit eutils multilib libtool
+inherit eutils multilib libtool toolchain-funcs
 
 DESCRIPTION="Library for correcting images based on lens characteristics and callibration data"
 HOMEPAGE="http://lensfun.berlios.de/"
@@ -18,6 +18,8 @@ DEPEND="doc? ( app-doc/doxygen )
 RDEPEND=""
 
 src_compile() {
+	CC=$(tc-getCC) CFLAGS="$CFLAGS" \
+	CXX=$(tc-getCXX) CXXFLAGS="$CXXFLAGS" \
 	./configure --prefix=/usr --datadir=/usr/share/lensfun --sysconfdir=/etc \
 	|| die "configure failed"
 	emake libs tools tests data || die "emake failed"
