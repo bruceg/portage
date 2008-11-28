@@ -8,7 +8,7 @@ inherit libtool
 
 S=${WORKDIR}/${P}
 DESCRIPTION="A high-performance, lightweight CORBA ORB aiming for CORBA 2.2 compliance"
-SRC_URI="ftp://ftp.gnome.org/pub/GNOME/sources/${PN}/0.5/${P}.tar.bz2"
+SRC_URI="ftp://ftp.gnome.org/pub/GNOME/sources/ORBit/0.5/ORBit-${PV}.tar.bz2"
 HOMEPAGE="http://www.labs.redhat.com/orbit/"
 
 DEPEND="nls? ( sys-devel/gettext )
@@ -20,6 +20,7 @@ RDEPEND="=dev-libs/glib-1.2*"
 SLOT="0"
 LICENSE="GPL-2"
 KEYWORDS="x86 sparc alpha ~mips amd64"
+S="${WORKDIR}/ORBit-${PV}"
 
 src_compile() {
 	if [ -z "`use nls`" ] ; then
