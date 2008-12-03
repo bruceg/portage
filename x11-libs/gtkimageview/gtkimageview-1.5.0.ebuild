@@ -8,7 +8,7 @@ SRC_URI="http://trac.bjourne.webfactional.com/attachment/wiki/WikiStart/${P}.tar
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-KEYWORDS="x86"
+KEYWORDS="x86 amd64"
 IUSE=""
 
 DEPEND="x11-libs/gtk+"
