@@ -56,5 +56,6 @@ src_install() {
 	newins ${FILESDIR}/ntpd.run run
 	insinto /var/service/ntpd/log
 	newins ${FILESDIR}/ntpd-log.run run
-	chmod 1755 ${D}/var/service/ntpd
+	fperms 1755 /var/service/ntpd
+	fperms 700 /var/service/ntpd/run /var/service/ntpd/log/run
 }
