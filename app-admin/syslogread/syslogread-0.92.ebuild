@@ -9,7 +9,7 @@ KEYWORDS="x86 amd64 sparc"
 IUSE=""
 
 DEPEND=">=dev-libs/bglibs-0.19"
-RDEPEND=">=supervise-scripts-3.5"
+RDEPEND=">=sys-process/supervise-scripts-3.5"
 PROVIDE="virtual/logger"
 
 src_compile() {
