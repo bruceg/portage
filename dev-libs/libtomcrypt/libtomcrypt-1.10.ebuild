@@ -17,7 +17,7 @@ RDEPEND="libtommath? ( dev-libs/libtommath )
 	tomsfastmath? ( dev-libs/tomsfastmath )
 	!libtommath? ( !tomsfastmath? ( dev-libs/libtommath ) )"
 DEPEND="${RDEPEND}
-	doc? ( virtual/tetex virtual/ghostscript )"
+	doc? ( virtual/latex-base virtual/ghostscript )"
 
 src_unpack() {
 	unpack crypt-${PV}.tar.bz2
