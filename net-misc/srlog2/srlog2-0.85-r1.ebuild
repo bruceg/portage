@@ -51,7 +51,7 @@ src_install() {
 }
 
 pkg_postinst() {
-	echo "Don't forget to run 'emerge --config =${PF}' to set up keys."
+	echo "Don't forget to run 'emerge --config =${CATEGORY}/${PF}' to set up keys."
 }
 
 pkg_config() {
