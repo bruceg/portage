@@ -28,20 +28,21 @@ src_compile() {
 	echo "/usr/lib/bglibs" > conf-bglibs
 	echo "/usr/lib" >conf-lib
 	echo "/usr/include" >conf-include
+	echo "/usr/bin" >conf-bin
 	echo "$(tc-getCC) ${CFLAGS} -I/var/vpopmail/include" > conf-cc
 	echo "$(tc-getCC) -L/var/vpopmail/lib" > conf-ld
-	make || die
+	emake || die
 	if use mysql; then
-		make mysql || die
+		emake mysql || die
 	fi
 	if use postgresql; then
-		make pgsql || die
+		emake pgsql || die
 	fi
 	if use vpopmail; then
-		make cvm-vchkpw || die
+		emake cvm-vchkpw || die
 	fi
 	if use sqlite3; then
-		make sqlite || die
+		emake sqlite || die
 	fi
 }
 
