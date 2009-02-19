@@ -23,12 +23,12 @@ src_compile() {
 	echo /usr/share/man >conf-man
 	echo "$(tc-getCC) ${CFLAGS} -g" > conf-cc
 	echo "$(tc-getCC) ${LDFLAGS} -s" > conf-ld
-	emake -j1 || die
+	emake || die
 }
 
 src_test() {
 	einfo "Running selftests"
-	emake -j1 selftests
+	emake selftests
 }
 
 src_install () {
