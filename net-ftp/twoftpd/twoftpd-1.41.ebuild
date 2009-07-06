@@ -14,7 +14,7 @@ DEPEND="
 	"
 RDEPEND="
 	sys-apps/ucspi-tcp
-	>=supervise-scripts-3.5
+	>=sys-process/supervise-scripts-3.5
 	"
 
 src_compile() {
