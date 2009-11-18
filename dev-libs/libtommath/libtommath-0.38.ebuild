@@ -5,8 +5,8 @@
 inherit eutils multilib
 
 DESCRIPTION="highly optimized and portable routines for integer based number theoretic applications"
-HOMEPAGE="http://math.libtomcrypt.org/"
-SRC_URI="http://math.libtomcrypt.org/files/ltm-${PV}.tar.bz2"
+HOMEPAGE="http://math.libtomcrypt.com/"
+SRC_URI="http://math.libtomcrypt.com/files/ltm-${PV}.tar.bz2"
 
 LICENSE="public-domain"
 SLOT="0"
