@@ -50,10 +50,10 @@ src_install() {
 
 pkg_postinst() {
 	if [ -e /service/twoftpd ]; then
-		einfo "Restarting twoftpd"
+		einfo "Restarting twoftpd service"
 		svc -t /service/twoftpd
 	else
-		einfo "Installing service twoftpd"
+		einfo "Installing twoftpd service"
 		svc-add twoftpd
 	fi
 }
@@ -61,6 +61,7 @@ pkg_postinst() {
 pkg_postrm() {
 	test -e /usr/bin/twoftpd-xfer || (
 		if [ -L /service/twoftpd ]; then
+			einfo "Removing twoftpd service"
 			svc-remove twoftpd
 		fi
 	)
