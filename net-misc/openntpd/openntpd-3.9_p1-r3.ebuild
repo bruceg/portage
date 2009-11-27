@@ -41,6 +41,7 @@ src_prepare() {
 src_configure() {
 	econf \
 		--disable-strip \
+		--with-privsep-path=/var/lib/openntpd/chroot \
 		$(use_with !ssl builtin-arc4random) || die
 }
 
@@ -52,13 +53,15 @@ src_install() {
 	make install DESTDIR="${D}" || die
 	dodoc ChangeLog CREDITS README
 
-	newconfd "${FILESDIR}"/openntpd.conf.d ntpd
+	newconfd "${FILESDIR}"/${PVR}/openntpd.conf.d ntpd
+
+	keepdir /var/lib/openntpd/chroot
 
 	dodir /var/service/ntpd/log
 	insinto /var/service/ntpd
-	newins ${FILESDIR}/ntpd.run run
+	newins "${FILESDIR}"/${PVR}/ntpd.run run
 	insinto /var/service/ntpd/log
-	newins ${FILESDIR}/ntpd-log.run run
+	newins "${FILESDIR}"/${PVR}/ntpd-log.run run
 	fperms 1755 /var/service/ntpd
 	fperms 700 /var/service/ntpd/run /var/service/ntpd/log/run
 }
