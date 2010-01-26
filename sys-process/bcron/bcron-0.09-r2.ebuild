@@ -1,36 +1,42 @@
-inherit eutils toolchain-funcs
+#
+#
+#
 
-DESCRIPTION="Bruce's Cron System"
+CRON_SYSTEM_CRONTAB="yes"
+
+inherit cron eutils toolchain-funcs
+DESCRIPTION="A new cron system designed with secure operations in mind by Bruce Guenter"
+
 HOMEPAGE="http://untroubled.org/bcron/"
 SRC_URI="http://untroubled.org/bcron/archive/${P}.tar.gz"
+
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="x86 amd64 sparc"
 IUSE=""
 
-DEPEND="!virtual/cron
-	>=dev-libs/bglibs-0.18"
+DEPEND=">=dev-libs/bglibs-1.031"
 RDEPEND="!virtual/cron
+	>=sys-process/cronbase-0.3.2
 	virtual/editor
 	virtual/mta
-	sys-process/cronbase
 	sys-apps/ucspi-unix
 	>=sys-process/supervise-scripts-3.5"
 PROVIDE="virtual/cron"
-S=${WORKDIR}/${P}
 
 src_compile() {
 	echo "$(tc-getCC) ${CFLAGS}" >conf-cc
 	echo "$(tc-getCC) ${LDFLAGS}" >conf-ld
-	echo /usr/lib/bglibs/include >conf-bgincs
-	echo /usr/lib/bglibs/lib >conf-bglibs
-	emake programs || die "compile problem"
+	echo /usr/include/bglibs >conf-bgincs
+	echo /usr/lib/bglibs >conf-bglibs
+	emake -j1 || die "compile problem"
 }
 
 newrun() {
 	dodir "$2"
 	exeinto "$2"
 	newexe "$1" run
+	fperms 0500 "$2"
 }
 
 src_install() {
@@ -85,6 +91,7 @@ pkg_postrm() {
 	test -x /usr/bin/bcron-sched || (
 		for svc in bcron-{sched,spool,update}; do
 			if [ -L /service/$svc ]; then
+				einfo "Removing service $svc"
 				svc-remove $svc
 			fi
 		done
