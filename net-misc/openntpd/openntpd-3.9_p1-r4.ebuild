@@ -62,6 +62,6 @@ src_install() {
 	newins "${FILESDIR}"/${PVR}/ntpd.run run
 	insinto /var/service/ntpd/log
 	newins "${FILESDIR}"/${PVR}/ntpd-log.run run
-	fperms 1755 /var/service/ntpd
+	fperms 1500 /var/service/ntpd
 	fperms 700 /var/service/ntpd/run /var/service/ntpd/log/run
 }
