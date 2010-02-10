@@ -6,7 +6,7 @@ SRC_URI="mirror://sourceforge/pythonpalmdb/${P}.zip"
 
 LICENSE="LGPL"
 SLOT="0"
-KEYWORDS="x86"
+KEYWORDS="x86 amd64"
 IUSE=""
 
 DEPEND="virtual/python"
