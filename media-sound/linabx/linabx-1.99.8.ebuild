@@ -10,7 +10,7 @@ SRC_URI="http://www.beryllium.net/~remco/${PN}/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="x86"
+KEYWORDS="amd64 x86"
 IUSE=""
 
 RDEPEND=">=gnome-base/libgnome-2.10

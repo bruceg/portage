@@ -1,0 +1,35 @@
+diff -ur linabx-1.99.8-orig/doc/linabx-manual/C/Makefile.in linabx-1.99.8/doc/linabx-manual/C/Makefile.in
+--- linabx-1.99.8-orig/doc/linabx-manual/C/Makefile.in	2006-08-07 11:39:56.000000000 -0600
++++ linabx-1.99.8/doc/linabx-manual/C/Makefile.in	2007-10-09 17:17:54.000000000 -0600
+@@ -382,7 +382,6 @@
+ 	for file in $(omffile); do \
+ 		$(INSTALL_DATA) $(srcdir)/$$file.out $(DESTDIR)$(omf_dest_dir)/$$file; \
+ 	done
+-	-scrollkeeper-update -p $(scrollkeeper_localstate_dir) -o $(DESTDIR)$(omf_dest_dir)
+ 
+ uninstall-local-omf:
+ 	-for file in $(srcdir)/*.omf; do \
+@@ -390,7 +389,6 @@
+ 		rm -f $(omf_dest_dir)/$$basefile; \
+ 	done
+ 	-rmdir $(omf_dest_dir)
+-	-scrollkeeper-update -p $(scrollkeeper_localstate_dir)
+ 
+ all: omf
+ 
+diff -ur linabx-1.99.8-orig/doc/omf.make linabx-1.99.8/doc/omf.make
+--- linabx-1.99.8-orig/doc/omf.make	2005-08-04 13:16:59.000000000 -0600
++++ linabx-1.99.8/doc/omf.make	2007-10-09 17:17:38.000000000 -0600
+@@ -43,7 +43,6 @@
+ 	for file in $(omffile); do \
+ 		$(INSTALL_DATA) $(srcdir)/$$file.out $(DESTDIR)$(omf_dest_dir)/$$file; \
+ 	done
+-	-scrollkeeper-update -p $(scrollkeeper_localstate_dir) -o $(DESTDIR)$(omf_dest_dir)
+ 
+ uninstall-local-omf:
+ 	-for file in $(srcdir)/*.omf; do \
+@@ -51,4 +50,3 @@
+ 		rm -f $(omf_dest_dir)/$$basefile; \
+ 	done
+ 	-rmdir $(omf_dest_dir)
+-	-scrollkeeper-update -p $(scrollkeeper_localstate_dir)
