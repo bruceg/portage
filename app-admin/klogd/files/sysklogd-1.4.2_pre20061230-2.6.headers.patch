@@ -1,0 +1,39 @@
+diff --git a/ksym_mod.c b/ksym_mod.c
+index 6a9d0ab..fbb0476 100644
+--- a/ksym_mod.c
++++ b/ksym_mod.c
+@@ -85,9 +85,23 @@
+  *	module.h locally instead.
+  */
+ 
+-
+ /* Includes. */
++
+ #include <stdlib.h>
++#include <time.h>
++#include <signal.h>
++#include <linux/version.h>
++
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,1)
++
++	#define __KERNEL__
++	#include <asm/posix_types.h>
++	#undef __KERNEL_STRICT_NAMES
++	#include <linux/types.h>
++	#undef __KERNEL__
++
++#endif
++
+ #include <malloc.h>
+ #include <unistd.h>
+ #include <signal.h>
+@@ -97,9 +111,7 @@
+ #include "module.h"
+ #if !defined(__GLIBC__)
+ #include <linux/time.h>
+-#include <linux/linkage.h>
+ #else /* __GLIBC__ */
+-#include <linux/linkage.h>
+ extern __off64_t lseek64 __P ((int __fd, __off64_t __offset, int __whence));
+ extern int get_kernel_syms __P ((struct kernel_sym *__table));
+ #endif /* __GLIBC__ */
