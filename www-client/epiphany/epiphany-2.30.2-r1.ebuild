@@ -34,7 +34,7 @@ RDEPEND=">=dev-libs/glib-2.19.7
 	introspection? ( >=dev-libs/gobject-introspection-0.6.7 )
 	networkmanager? ( net-misc/networkmanager )
 	nss? ( dev-libs/nss )
-	seed? ( dev-libs/gir-repository >=gnome-extra/seed-2.30.0 )
+	seed? ( dev-libs/gir-repository >=dev-libs/seed-2.30.0 )
 	x11-themes/gnome-icon-theme"
 DEPEND="${RDEPEND}
 	app-text/scrollkeeper
