@@ -13,7 +13,7 @@ SLOT="0"
 KEYWORDS="alpha amd64 ppc sparc x86"
 IUSE=""
 
-RDEPEND=">=sys-process/daemontools-0.76"
+RDEPEND="|| ( >=sys-process/daemontools-0.76 sys-process/daemontools-encore )"
 DEPEND="${RDEPEND}"
 
 src_unpack() {
