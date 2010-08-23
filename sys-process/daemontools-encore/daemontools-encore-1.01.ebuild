@@ -18,13 +18,6 @@ IUSE=""
 DEPEND=""
 RDEPEND="${DEPEND}
 	!sys-process/daemontools"
-PROVIDE="sys-process/daemontools"
-
-src_unpack() {
-	unpack ${A}
-	cd ${S}
-	epatch "$FILESDIR"/missing-manpages.patch
-}
 
 src_compile() {
 	echo $(tc-getCC) ${CFLAGS} >conf-cc
