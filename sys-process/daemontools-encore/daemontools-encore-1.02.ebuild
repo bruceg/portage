@@ -4,7 +4,7 @@
 
 EAPI=3
 
-inherit eutils toolchain-funcs
+inherit eutils toolchain-funcs flag-o-matic qmail
 
 DESCRIPTION="Collection of tools for managing UNIX services"
 HOMEPAGE="http://untroubled.org/daemontools-encore/"
@@ -13,22 +13,38 @@ SRC_URI="${HOMEPAGE}/${P}.tar.gz"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="x86 amd64"
-IUSE=""
+IUSE="static"
 
 DEPEND=""
-RDEPEND="${DEPEND}
-	!sys-process/daemontools"
+RDEPEND="selinux? ( sec-policy/selinux-daemontools )
+	!sys-process/daemontools !app-doc/daemontools-man"
 
 src_compile() {
-	echo $(tc-getCC) ${CFLAGS} >conf-cc
-	echo $(tc-getCC) ${LDFLAGS} >conf-ld
-	make
+	use static && append-ldflags -static
+	qmail_set_cc
+	emake || die
 }
 
 src_install() {
+	keepdir /service
+
 	echo ${D}/usr/bin >conf-bin
 	echo ${D}/usr/share/man >conf-man
 	dodir /usr/bin
 	dodir /usr/share/man
-	make install
+	emake install || die
+
+	dodoc ChangeLog CHANGES CHANGES.djb LICENSE README TODO
+
+	newinitd "${FILESDIR}"/svscan.init-${PV} svscan
+}
+
+pkg_postinst() {
+	einfo
+	einfo "You can run daemontools using the svscan init.d script,"
+	einfo "or you could run it through inittab."
+	einfo "To use inittab, emerge supervise-scripts and run:"
+	einfo "svscan-add-to-inittab"
+	einfo "Then you can hup init with the command telinit q"
+	einfo
 }
