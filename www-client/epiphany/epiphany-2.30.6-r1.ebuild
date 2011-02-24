@@ -36,7 +36,7 @@ RDEPEND=">=dev-libs/glib-2.19.7
 	x11-themes/gnome-icon-theme
 	avahi? ( >=net-dns/avahi-0.6.22 )
 	networkmanager? ( net-misc/networkmanager )
-	seed? ( dev-libs/gir-repository >=dev-libs/seed-2.30.0 )
+	seed? ( dev-libs/gobject-introspection >=dev-libs/seed-2.30.0 )
 	nss? ( dev-libs/nss )"
 #       introspection? ( >=dev-libs/gobject-introspection-0.6.7 )
 DEPEND="${RDEPEND}
