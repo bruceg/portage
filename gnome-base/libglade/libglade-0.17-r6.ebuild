@@ -3,6 +3,7 @@
 # $Header: /home/cvsroot/gentoo-x86/gnome-base/libglade/libglade-0.17-r6.ebuild,v 1.14 2003/02/13 12:12:06 vapier Exp $
 
 IUSE="nls bonobo"
+EAPI=2
 
 #provide Xmake and Xemake
 
@@ -30,7 +31,7 @@ src_compile() {
 	elibtoolize
 
 	local myconf=""
-	
+
 	use bonobo && myconf="${myconf} --enable-bonobo"
 	use bonobo || myconf="${myconf} --disable-bonobo --disable-bonobotest"
 
@@ -42,7 +43,7 @@ src_compile() {
 		--localstatedir=/var/lib \
 		--disable-gnomedb \
 		${myconf} || die
-		
+
 	Xemake || die
 }
 
@@ -51,7 +52,7 @@ src_install() {
 	     sysconfdir=${D}/etc \
 	     localstatedir=${D}/var/lib \
 	     install || die
-	
+
 	dodoc AUTHORS COPYING* ChangeLog NEWS
 	dodoc doc/*.txt
 }
