@@ -14,7 +14,7 @@ SLOT="0"
 KEYWORDS="alpha amd64 ~arm hppa ~ia64 ~mips ppc ppc64 sparc x86"
 IUSE="doc mmx"
 
-RDEPEND="media-libs/jpeg
+RDEPEND="virtual/jpeg
 	media-libs/tiff
 	=x11-libs/gtk+-1.2*
 	>=media-libs/libpng-1.2.1
