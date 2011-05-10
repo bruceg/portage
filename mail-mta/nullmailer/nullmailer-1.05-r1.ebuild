@@ -17,8 +17,17 @@ IUSE=""
 DEPEND="sys-apps/groff"
 RDEPEND="sys-apps/shadow
 	virtual/logger
-	!virtual/mta"
-PROVIDE="virtual/mta"
+	!mail-mta/courier
+	!mail-mta/esmtp
+	!mail-mta/exim
+	!mail-mta/mini-qmail
+	!mail-mta/msmtp
+	!mail-mta/nbsmtp
+	!mail-mta/netqmail
+	!mail-mta/postfix
+	!mail-mta/qmail-ldap
+	!mail-mta/sendmail
+	!mail-mta/ssmtp"
 
 src_unpack() {
 	unpack ${P}.tar.gz
