@@ -1,0 +1,83 @@
+diff --git a/desktop/configure.ac b/desktop/configure.ac
+index c761374..91d0f8d 100644
+--- a/desktop/configure.ac
++++ b/desktop/configure.ac
+@@ -110,7 +110,7 @@ PKG_CHECK_MODULES([BARRY], [libbarry-0 libbarrysync-0])
+ PKG_CHECK_MODULES([GLIB2], [glib-2.0])
+ PKG_CHECK_MODULES([LIBXMLPP], [libxml++-2.6])
+ PKG_CHECK_MODULES([OPENSYNC22], [opensync-1.0], [], [OS22NOTFOUND=yes])
+-PKG_CHECK_MODULES([OPENSYNC40], [libopensync1], [], [OS40NOTFOUND=yes])
++PKG_CHECK_MODULES([OPENSYNC40], [libopensync], [], [OS40NOTFOUND=yes])
+ 
+ if test "$OS22NOTFOUND" = "yes" -a "$OS40NOTFOUND" = "yes" ; then
+ 	AC_MSG_ERROR(dnl
+diff --git a/desktop/src/os40.cc b/desktop/src/os40.cc
+index 64d2040..5b5c89c 100644
+--- a/desktop/src/os40.cc
++++ b/desktop/src/os40.cc
+@@ -40,13 +40,13 @@
+ #include <glib.h>
+ 
+ // use relative paths to backtrack enough to specify only 0.4x includes
+-#include <../libopensync1/opensync/opensync.h>
+-#include <../libopensync1/opensync/opensync-group.h>
+-#include <../libopensync1/opensync/opensync-format.h>
+-#include <../libopensync1/opensync/opensync-plugin.h>
+-#include <../libopensync1/opensync/opensync-engine.h>
+-#include <../libopensync1/opensync/opensync-data.h>
+-#include <../libopensync1/opensync/opensync-capabilities.h>
++#include <../libopensync/opensync/opensync.h>
++#include <../libopensync/opensync/opensync-group.h>
++#include <../libopensync/opensync/opensync-format.h>
++#include <../libopensync/opensync/opensync-plugin.h>
++#include <../libopensync/opensync/opensync-engine.h>
++#include <../libopensync/opensync/opensync-data.h>
++#include <../libopensync/opensync/opensync-capabilities.h>
+ 
+ using namespace std;
+ using namespace Barry;
+diff --git a/opensync-plugin-0.4x/configure.ac b/opensync-plugin-0.4x/configure.ac
+index 15416a9..c7146dd 100644
+--- a/opensync-plugin-0.4x/configure.ac
++++ b/opensync-plugin-0.4x/configure.ac
+@@ -27,7 +27,7 @@ AM_CONDITIONAL([WITH_GCCVISIBILITY], [test "$HAVE_C_GCCVISIBILITY" = "1" -a "$HA
+ AC_LANG([C++])
+ 
+ PKG_CHECK_MODULES([GLIB2], [glib-2.0])
+-PKG_CHECK_MODULES([OPENSYNC4X], [libopensync1])
++PKG_CHECK_MODULES([OPENSYNC4X], [libopensync])
+ PKG_CHECK_MODULES([BARRY], [libbarry-0])
+ PKG_CHECK_MODULES([BARRYSYNC], [libbarrysync-0])
+ 
+@@ -36,10 +36,10 @@ PKG_CHECK_MODULES([BARRYSYNC], [libbarrysync-0])
+ AC_SUBST(TREE_BUILD_CXXFLAGS)
+ AC_SUBST(TREE_BUILD_LDFLAGS)
+ 
+-OPENSYNC_CONFIGDIR=$(pkg-config --variable=configdir libopensync1)
+-OPENSYNC_PLUGINDIR=$(pkg-config --variable=plugindir libopensync1)
+-OPENSYNC_FORMATSDIR=$(pkg-config --variable=formatsdir libopensync1)
+-OPENSYNC_HEADERDIR=$(pkg-config --variable=headerdir libopensync1)
++OPENSYNC_CONFIGDIR=$(pkg-config --variable=configdir libopensync)
++OPENSYNC_PLUGINDIR=$(pkg-config --variable=plugindir libopensync)
++OPENSYNC_FORMATSDIR=$(pkg-config --variable=formatsdir libopensync)
++OPENSYNC_HEADERDIR=$(pkg-config --variable=headerdir libopensync)
+ 
+ AC_SUBST(OPENSYNC_CONFIGDIR) ## This is the place where you can install the default configuration files of your plugin
+ AC_SUBST(OPENSYNC_PLUGINDIR) ## This is the dir where you plugin will be installed
+diff --git a/opensync-plugin-0.4x/src/barry_sync.cc b/opensync-plugin-0.4x/src/barry_sync.cc
+index 9bb2b93..67393c5 100644
+--- a/opensync-plugin-0.4x/src/barry_sync.cc
++++ b/opensync-plugin-0.4x/src/barry_sync.cc
+@@ -1108,9 +1108,9 @@ osync_bool get_sync_info(OSyncPluginEnv *env, OSyncError **error)
+ 	osync_plugin_set_description(plugin, "Plugin to synchronize note, task, calendar and contact entries on USB Blackberry handhelds");
+ 
+ 	// Set the callback functions
+-	osync_plugin_set_initialize_func(plugin, initialize);
+-	osync_plugin_set_finalize_func(plugin, finalize);
+-	osync_plugin_set_discover_func(plugin, discover);
++	osync_plugin_set_initialize(plugin, initialize);
++	osync_plugin_set_finalize(plugin, finalize);
++	osync_plugin_set_discover(plugin, discover);
+ 	osync_plugin_set_start_type(plugin, OSYNC_START_TYPE_PROCESS);
+ 
+ 	if( !osync_plugin_env_register_plugin(env, plugin, error) ) {
