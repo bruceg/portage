@@ -1,3 +1,7 @@
+EAPI="3"
+
+PYTHON_DEPEND="2"
+
 inherit distutils
 
 DESCRIPTION="Pure Python library to read/write/modify Palm PDB and PRC format databases."
