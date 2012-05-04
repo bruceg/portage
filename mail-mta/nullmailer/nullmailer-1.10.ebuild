@@ -16,7 +16,7 @@ IUSE="tls"
 
 DEPEND="sys-apps/groff
 	tls? ( net-libs/gnutls )"
-RDEPEND="sys-apps/shadow
+RDEPEND="virtual/shadow
 	virtual/logger
 	tls? ( net-libs/gnutls )
 	!mail-mta/courier
