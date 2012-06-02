@@ -1,38 +1,34 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-misc/unison/unison-2.27.57-r1.ebuild,v 1.13 2010/08/05 06:16:50 aballier Exp $
+# $Header: $
 
 EAPI="2"
 
 inherit eutils versionator
 
-IUSE="gtk doc static debug threads +ocamlopt"
+IUSE="gtk doc static debug threads +ocamlopt test"
 
 DESCRIPTION="Two-way cross-platform file synchronizer"
 HOMEPAGE="http://www.cis.upenn.edu/~bcpierce/unison/"
 LICENSE="GPL-2"
 SLOT="$(get_version_component_range 1-2 ${PV})"
-KEYWORDS="amd64 ppc sparc x86"
+KEYWORDS="~amd64 ~x86"
 
 # ocaml version so we are sure it has ocamlopt use flag
 DEPEND=">=dev-lang/ocaml-3.10.2[ocamlopt?]
-	gtk? ( >=dev-ml/lablgtk-2.2 )"
+	gtk? ( >=dev-ml/lablgtk-2.2 )
+	test? ( || ( dev-util/ctags virtual/emacs ) )"
 
 RDEPEND="gtk? ( >=dev-ml/lablgtk-2.2
-|| ( net-misc/x11-ssh-askpass net-misc/ssh-askpass-fullscreen ) )
+	|| ( net-misc/x11-ssh-askpass net-misc/ssh-askpass-fullscreen ) )
 	!net-misc/unison:0
 	app-admin/eselect-unison"
 
-PDEPEND="gtk? ( media-fonts/font-schumacher-misc )"
+#PDEPEND="gtk? ( media-fonts/font-schumacher-misc )"
 
 SRC_URI="http://www.cis.upenn.edu/~bcpierce/unison/download/releases/${P}/${P}.tar.gz
-doc? ( http://www.cis.upenn.edu/~bcpierce/unison/download/releases/${P}/${P}-manual.pdf
-	http://www.cis.upenn.edu/~bcpierce/unison/download/releases/${P}/${P}-manual.html )"
-
-src_prepare() {
-	epatch "${FILESDIR}/${P}-as-needed.patch"
-	epatch "${FILESDIR}/${PN}-mymap.patch"
-}
+	doc? ( http://www.cis.upenn.edu/~bcpierce/unison/download/releases/${P}/${P}-manual.pdf
+		http://www.cis.upenn.edu/~bcpierce/unison/download/releases/${P}/${P}-manual.html )"
 
 src_compile() {
 	local myconf
@@ -57,8 +53,11 @@ src_compile() {
 
 	use ocamlopt || myconf="$myconf NATIVE=false"
 
+	emake clean || die "error cleaning"
+	emake mkProjectInfo || die "error preparing"
+
 	# Discard cflags as it will try to pass them to ocamlc...
-	emake -j1 $myconf CFLAGS="" || die "error making unsion"
+	emake $myconf CFLAGS="" buildexecutable || die "error making unsion"
 }
 
 src_test() {
@@ -70,20 +69,13 @@ src_install () {
 	# work to force the Makefile to do the right thing.
 	newbin unison unison-${SLOT} || die
 	dodoc BUGS.txt CONTRIB INSTALL NEWS \
-	      README ROADMAP.txt TODO.txt || die
+		  README ROADMAP.txt TODO.txt || die
 
 	if use doc; then
 		dohtml "${DISTDIR}/${P}-manual.html" || die
 		dodoc "${DISTDIR}/${P}-manual.pdf" || die
 	fi
 	use ocamlopt || export STRIP_MASK="*/bin/*"
-	if use gtk; then
-		insinto /usr/share/applications
-		doins "${FILESDIR}/${PN}-gtk.desktop"
-		insinto /usr/share/pixmaps
-		doins "${FILESDIR}/${PN}-gtk.svg"
-		doins "${FILESDIR}/${PN}-gtk.xpm"
-	fi
 }
 
 pkg_postinst() {
