@@ -16,13 +16,16 @@ KEYWORDS="x86 amd64 sparc"
 IUSE=""
 
 DEPEND=">=dev-libs/bglibs-1.031"
-RDEPEND="!virtual/cron
+RDEPEND="${DEPEND}
 	>=sys-process/cronbase-0.3.2
 	virtual/editor
 	virtual/mta
 	sys-apps/ucspi-unix
-	>=sys-process/supervise-scripts-3.5"
-PROVIDE="virtual/cron"
+	>=sys-process/supervise-scripts-3.5
+	!sys-process/vixie-cron
+	!sys-process/cronie
+	!sys-process/dcron
+	!sys-process/fcron"
 
 src_compile() {
 	echo "$(tc-getCC) ${CFLAGS}" >conf-cc
