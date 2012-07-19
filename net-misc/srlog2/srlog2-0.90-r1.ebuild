@@ -38,6 +38,9 @@ src_unpack() {
 src_compile() {
 	cd ${S}
 	emake all || die
+
+	[[ -x /sbin/paxctl ]] && \
+		paxctl -m srlog2 srlog2d srlog2-keygen
 }
 
 src_install() {
@@ -51,8 +54,6 @@ src_install() {
 }
 
 pkg_postinst() {
-	[[ -x /sbin/paxctl ]] && \
-		paxctl -m ${D}/usr/bin/srlog2{,d,-keygen}
 	echo "Don't forget to run 'emerge --config =${CATEGORY}/${PF}' to set up keys."
 }
 
