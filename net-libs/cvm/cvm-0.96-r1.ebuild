@@ -31,18 +31,18 @@ src_compile() {
 	echo "/usr/bin" >conf-bin
 	echo "$(tc-getCC) ${CFLAGS} -I/var/vpopmail/include" > conf-cc
 	echo "$(tc-getCC) -L/var/vpopmail/lib" > conf-ld
-	emake || die
+	emake -j1 || die
 	if use mysql; then
-		emake mysql || die
+		emake -j1 mysql || die
 	fi
 	if use postgresql; then
-		emake pgsql || die
+		emake -j1 pgsql || die
 	fi
 	if use vpopmail; then
-		emake cvm-vchkpw || die
+		emake -j1 cvm-vchkpw || die
 	fi
 	if use sqlite3; then
-		emake sqlite || die
+		emake -j1 sqlite || die
 	fi
 }
 
