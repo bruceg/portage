@@ -2,8 +2,8 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /home/cvsroot/gentoo-x86/gnome-base/libglade/libglade-0.17-r6.ebuild,v 1.14 2003/02/13 12:12:06 vapier Exp $
 
-IUSE="nls bonobo"
 EAPI=2
+IUSE="nls bonobo"
 
 #provide Xmake and Xemake
 
