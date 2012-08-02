@@ -14,8 +14,8 @@ RDEPEND=">=dev-lang/python-2.2"
 #S=${WORKDIR}/${P}
 
 src_install() {
-	cd ${D}
-	rpm2cpio ${DISTDIR}/${A} | cpio -id
+	cd "${D}"
+	rpm2cpio "${DISTDIR}/${A}" | cpio -id
 	pyversion=`python2 -c 'import sys;print sys.version[:3]'`
 	pydir=usr/lib/python${pyversion}
 	mv usr/lib/python ${pydir}
