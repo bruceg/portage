@@ -1,6 +1,6 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-news/liferea/liferea-1.8.0.ebuild,v 1.4 2012/03/08 23:07:20 ranger Exp $
+# $Header: /var/cvsroot/gentoo-x86/net-news/liferea/liferea-1.8.8.ebuild,v 1.1 2012/09/15 15:17:22 vostorga Exp $
 
 EAPI=4
 
@@ -15,25 +15,25 @@ HOMEPAGE="http://liferea.sourceforge.net/"
 SRC_URI="mirror://sourceforge/${PN}/${MY_P}.tar.gz"
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="amd64 ppc ppc64 ~x86"
+KEYWORDS="~amd64 ~ppc ~ppc64 ~x86"
 IUSE="ayatana libnotify"
 
 RDEPEND=">=x11-libs/gtk+-2.18.0:2
 	>=dev-libs/glib-2.24.0:2
 	>=x11-libs/pango-1.4.0
 	>=gnome-base/gconf-1.1.9:2
-	dev-libs/json-glib
-	dev-libs/libunique:1
 	>=dev-libs/libxml2-2.6.27:2
 	>=dev-libs/libxslt-1.1.19
-	>=dev-db/sqlite-3.6.10:3
+	>=dev-db/sqlite-3.7.0:3
 	>=net-libs/libsoup-2.28.2:2.4
+	dev-libs/libunique:1
 	>=net-libs/webkit-gtk-1.2.2:2
+	dev-libs/json-glib
 	ayatana? ( dev-libs/libindicate )
 	libnotify? ( >=x11-libs/libnotify-0.3.2 )"
 DEPEND="${RDEPEND}
 	dev-util/intltool
-	dev-util/pkgconfig"
+	virtual/pkgconfig"
 
 DOCS="AUTHORS ChangeLog README"
 
