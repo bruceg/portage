@@ -12,7 +12,7 @@ SRC_URI="http://libtom.org/files/crypt-${PV}.tar.bz2"
 
 LICENSE="WTFPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~ppc ~x86"
+KEYWORDS="amd64 ~ppc x86"
 IUSE="doc"
 
 RDEPEND="dev-libs/libtommath"
