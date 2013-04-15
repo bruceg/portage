@@ -36,7 +36,7 @@ src_install() {
 
 	dodoc ChangeLog CHANGES CHANGES.djb LICENSE README TODO
 
-	newinitd "${FILESDIR}"/svscan.init-${PV} svscan
+	newinitd "${FILESDIR}"/svscan.init svscan
 }
 
 pkg_postinst() {
