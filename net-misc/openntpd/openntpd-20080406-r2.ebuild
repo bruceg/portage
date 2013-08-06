@@ -14,7 +14,7 @@ SRC_URI="mirror://debian/pool/main/${PN:0:1}/${PN}/${MY_P}.orig.tar.gz
 	mirror://debian/pool/main/${PN:0:1}/${PN}/${MY_P}-${DEB_VER}.debian.tar.gz"
 
 LICENSE="BSD GPL-2"
-SLOT="0"
+SLOT="BG"
 KEYWORDS="alpha amd64 arm hppa ia64 ~mips ppc ppc64 ~s390 sh ~sparc x86 ~x86-fbsd"
 IUSE="ssl selinux"
 
