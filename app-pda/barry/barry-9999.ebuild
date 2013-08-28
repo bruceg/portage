@@ -18,7 +18,7 @@ IUSE="boost doc gui opensync nls static-libs"
 
 RDEPEND="
 	dev-libs/glib:2
-	dev-libs/libusb:0
+	virtual/libusb:0
 	dev-libs/openssl
 	sys-libs/zlib
 	>=dev-cpp/libxmlpp-2.6
