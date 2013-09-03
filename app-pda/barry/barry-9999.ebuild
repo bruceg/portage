@@ -18,7 +18,7 @@ IUSE="boost doc gui opensync nls static-libs"
 
 RDEPEND="
 	dev-libs/glib:2
-	virtual/libusb:0
+	virtual/libusb:1
 	dev-libs/openssl
 	sys-libs/zlib
 	>=dev-cpp/libxmlpp-2.6
@@ -34,10 +34,11 @@ DEPEND="${RDEPEND}
 	doc?	( >=app-doc/doxygen-1.5.6 )
 	nls?	( >=sys-devel/gettext-0.17 )"
 
-DOCS=(AUTHORS DEPUTY ChangeLog NEWS README TODO)
+DOCS=(AUTHORS ChangeLog NEWS README TODO)
 
 src_configure() {
 	epatch ${FILESDIR}/libopensync-0.39.patch
+	epatch ${FILESDIR}/define-fileno.patch
 	./buildgen.sh
 	myeconfargs=(
 		$(use_enable boost)
