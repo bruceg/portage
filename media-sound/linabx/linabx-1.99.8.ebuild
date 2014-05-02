@@ -5,8 +5,8 @@
 inherit eutils
 
 DESCRIPTION="Double blind audio test tool"
-HOMEPAGE="http://www.beryllium.net/~remco/linabx/"
-SRC_URI="http://www.beryllium.net/~remco/${PN}/${P}.tar.gz"
+HOMEPAGE="http://remco.beryllium.net/linabx/"
+SRC_URI="http://remco.beryllium.net/linabx/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
