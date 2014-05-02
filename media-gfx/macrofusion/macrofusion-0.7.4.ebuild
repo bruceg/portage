@@ -16,7 +16,7 @@ IUSE=""
 DEPEND=""
 RDEPEND="${DEPEND}
 	>=dev-lang/python-2.7
-	dev-python/imaging
+	virtual/python-imaging
 	dev-python/pygtk
 	>=dev-python/pyexiv2-0.3
 	>=gnome-base/libglade-2.0
