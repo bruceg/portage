@@ -14,7 +14,7 @@ LICENSE="GPLv2"
 KEYWORDS="x86 ~alpha ~hppa ~amd64 ~ppc ~mips ~sparc"
 DEPEND="sys-apps/grep sys-apps/groff
 	mysql? ( dev-db/mysql )
-	postgres? ( dev-db/postgresql )"
+	postgres? ( dev-db/postgresql-base )"
 RDEPEND="|| ( virtual/qmail mail-mta/qmail )"
 
 src_unpack() {

@@ -12,7 +12,7 @@ LICENSE="GPLv2"
 KEYWORDS="x86 ~alpha ~hppa ~amd64 ~ppc ~mips ~sparc"
 DEPEND="sys-apps/grep sys-apps/groff
 	mysql? ( dev-db/mysql )
-	postgres? ( dev-db/postgresql )
+	postgres? ( dev-db/postgresql-base )
 	sqlite3? ( dev-db/sqlite:3 )"
 RDEPEND="virtual/qmail mail-mta/qmail"
 
@@ -39,17 +39,17 @@ src_compile() {
 
 src_install () {
 	dodir /usr/bin
-	./install ${D}/usr/bin <BIN || die
+	./installer ${D}/usr/bin <BIN || die
 
 	dodir /usr/lib/ezmlm
-	./install ${D}/usr/lib/ezmlm <LIB || die
+	./installer ${D}/usr/lib/ezmlm <LIB || die
 
 	dodir /usr/share/man
 	# Skip installing the cat-man pages
-	grep -v :/cat MAN | ./install ${D}/usr/share/man || die
+	grep -v :/cat MAN | ./installer ${D}/usr/share/man || die
 
 	dodir /etc/ezmlm
-	./install ${D}/etc/ezmlm <ETC || die
+	./installer ${D}/etc/ezmlm <ETC || die
 
 	# Bug #47668 -- need to install ezmlm-cgi
 	dobin ezmlm-cgi
