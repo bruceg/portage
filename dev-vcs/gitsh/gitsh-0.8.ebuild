@@ -10,7 +10,7 @@ SRC_URI="https://github.com/thoughtbot/${PN}/releases/download/v${PV}/${P}.tar.g
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="~x86 ~amd64"
+KEYWORDS="x86 amd64"
 IUSE=""
 
 RDEPEND="dev-lang/ruby dev-vcs/git"
