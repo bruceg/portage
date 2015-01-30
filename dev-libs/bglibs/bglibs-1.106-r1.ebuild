@@ -4,7 +4,6 @@
 
 inherit fixheadtails eutils toolchain-funcs
 
-S=${WORKDIR}/${P}
 DESCRIPTION="Bruce Guenters Libraries Collection"
 HOMEPAGE="http://untroubled.org/bglibs/"
 SRC_URI="http://untroubled.org/bglibs/archive/${P}.tar.gz"
@@ -29,7 +28,7 @@ src_compile() {
 
 src_test() {
 	einfo "Running selftests"
-	emake -j1 selftests
+	emake selftests
 }
 
 src_install () {
@@ -37,7 +36,9 @@ src_install () {
 
 	#make backwards compatible symlinks
 	dosym . /usr/lib/bglibs/lib
-	dosym ../../include/bglibs /usr/lib/bglibs/include
+
+	# Remove bits that conflict with bglibs:2
+	rm -rf ${D}/usr/include ${D}/usr/bin ${D}/usr/share/man/man1
 
 	dodoc ANNOUNCEMENT COPYING NEWS README ChangeLog TODO VERSION
 	docinto html
@@ -53,8 +54,5 @@ pkg_postinst() {
 	# Upgrading causes these symlinks to get nuked
 	if ! [ -e /usr/lib/bglibs/lib ]; then
 		ln -s . /usr/lib/bglibs/lib
-	fi
-	if ! [ -e /usr/lib/bglibs/include ]; then
-		ln -s ../../include/bglibs /usr/lib/bglibs/include
 	fi
 }
