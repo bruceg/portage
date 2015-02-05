@@ -11,7 +11,7 @@ IUSE="lua"
 
 RDEPEND="virtual/libc
 	>=dev-libs/bglibs-2.01
-	net-libs/cvm
+	>=net-libs/cvm-0.97
 	lua? ( dev-lang/lua )"
 DEPEND="${RDEPEND}"
 
