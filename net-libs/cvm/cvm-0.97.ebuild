@@ -18,7 +18,7 @@ RDEPEND="virtual/libc
 DEPEND="${RDEPEND}
 	sys-devel/libtool
 	mysql? ( virtual/mysql )
-	postgres? ( dev-db/postgresql-base )
+	postgres? ( dev-db/postgresql )
 	vpopmail? ( net-mail/vpopmail )
 	sqlite3? ( =dev-db/sqlite-3* )"
 
