@@ -23,6 +23,7 @@ src_compile() {
 	echo "$(tc-getCC) ${CFLAGS}" > conf-cc
 	echo "$(tc-getCC)" > conf-ld
 	echo "$(tc-getCC) -fPIC -shared" >conf-ccso
+	perl -pi -e 's/ -lbg-sysdeps//' Makefile
 	make || die
 	if use lua
 	then
@@ -38,6 +39,9 @@ src_install() {
 	newexe ${FILESDIR}/run-smtpfront run.mailfront
 	exeinto /var/qmail/supervise/qmail-pop3d
 	newexe ${FILESDIR}/run-pop3front run.mailfront
+
+	insinto /usr/lib/mailfront
+	doins plugin-rbl.so
 
 	dodoc ANNOUNCEMENT COPYING ChangeLog NEWS README VERSION
 	dohtml *.html
