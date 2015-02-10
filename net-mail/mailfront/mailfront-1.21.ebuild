@@ -1,3 +1,5 @@
+EAPI=5
+
 inherit toolchain-funcs
 
 DESCRIPTION="Mail server network protocol front-ends"
@@ -10,7 +12,7 @@ KEYWORDS="x86 amd64 ~sparc ~ppc"
 IUSE="lua"
 
 DEPEND="virtual/libc
-	>=dev-libs/bglibs-1.101
+	>=dev-libs/bglibs-1.101:0
 	lua? ( dev-lang/lua )"
 RDEPEND="net-libs/cvm"
 
