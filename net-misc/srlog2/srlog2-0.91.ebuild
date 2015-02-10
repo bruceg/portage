@@ -1,5 +1,6 @@
-# Copyright 2003 FutureQuest, Inc.
 # $Header: $
+
+EAPI=5
 
 inherit eutils toolchain-funcs
 
@@ -12,9 +13,9 @@ KEYWORDS="x86 amd64"
 HOMEPAGE="http://untroubled.org/srlog2/"
 RDEPEND="virtual/libc
 	>=dev-libs/libtomcrypt-1.03
-	>=dev-libs/nistp224-0.75"
-DEPEND="${RDEPEND}
-	>=dev-libs/bglibs-1.041"
+	>=dev-libs/nistp224-0.75
+	>=dev-libs/bglibs-1.041:0"
+DEPEND="${RDEPEND}"
 
 PROVIDE=""
 
