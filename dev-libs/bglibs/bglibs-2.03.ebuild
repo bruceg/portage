@@ -14,6 +14,7 @@ KEYWORDS="x86 sparc ~mips ~alpha ~ppc ~arm amd64 ~hppa"
 
 RDEPEND="virtual/libc"
 DEPEND="${RDEPEND}
+	!<=dev-libs/bglibs-1.106
 	sys-devel/libtool"
 
 src_compile() {
