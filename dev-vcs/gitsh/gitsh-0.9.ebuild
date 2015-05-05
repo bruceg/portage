@@ -12,7 +12,7 @@ inherit autotools ruby-fakegem
 
 DESCRIPTION="An interactive shell for git"
 HOMEPAGE="https://github.com/thoughtbot/gitsh"
-SRC_URI="https://github.com/thoughtbot/gitsh/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/thoughtbot/${PN}/releases/download/v${PV}/${P}.tar.gz"
 
 SLOT="0"
 LICENSE="BSD"
