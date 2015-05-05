@@ -37,3 +37,7 @@ each_ruby_configure() {
 each_ruby_compile() {
 	default
 }
+
+each_ruby_install() {
+	default
+}
