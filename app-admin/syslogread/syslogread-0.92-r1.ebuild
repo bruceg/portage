@@ -1,4 +1,6 @@
-inherit eutils toolchain-funcs
+EAPI=5
+
+inherit eutils toolchain-funcs user
 
 DESCRIPTION="Syslog message handling toolkit"
 HOMEPAGE="http://untroubled.org/syslogread/"
@@ -8,8 +10,9 @@ SLOT="0"
 KEYWORDS="x86 amd64 sparc"
 IUSE=""
 
-DEPEND=">=dev-libs/bglibs-0.19"
-RDEPEND=">=sys-process/supervise-scripts-3.5"
+DEPEND=">=dev-libs/bglibs-0.19:0"
+RDEPEND="${DEPEND}
+	>=sys-process/supervise-scripts-3.5"
 PROVIDE="virtual/logger"
 
 src_compile() {
