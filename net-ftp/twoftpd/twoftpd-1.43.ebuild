@@ -1,3 +1,5 @@
+EAPI=5
+
 inherit eutils toolchain-funcs
 
 DESCRIPTION="Simple secure efficient FTP server"
@@ -9,7 +11,7 @@ KEYWORDS="x86 amd64 sparc"
 IUSE=""
 
 DEPEND="
-	>=dev-libs/bglibs-2.02
+	>=dev-libs/bglibs-2.02:2
 	>=net-libs/cvm-0.97
 	"
 RDEPEND="
