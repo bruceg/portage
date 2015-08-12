@@ -2,6 +2,8 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header$
 
+EAPI=5
+
 inherit toolchain-funcs
 
 DESCRIPTION="A proxy program for two connections set up by a UCSPI server and a UCSPI client."
@@ -11,16 +13,14 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE=""
-DEPEND=">=dev-libs/bglibs-1.025"
-RDEPEND=""
+DEPEND=">=dev-libs/bglibs-2.03:2"
+RDEPEND="${DEPEND}"
 
 src_compile() {
 	echo "$(tc-getCC) ${CFLAGS}" > conf-cc
 	echo "$(tc-getCC) ${LDFLAGS}" > conf-ld
 	echo "${D}/usr/bin" > conf-bin
 	echo "${D}/usr/share/man/" > conf-man
-	echo "/usr/include/bglibs/" > conf-bgincs
-	echo "/usr/lib/bglibs/" > conf-bglibs
 	emake || die
 }
 
