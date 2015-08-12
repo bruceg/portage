@@ -2,6 +2,8 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/net-libs/cvm/cvm-0.18.ebuild,v 1.5 2004/10/17 11:23:00 dholm Exp $
 
+EAPI=5
+
 inherit toolchain-funcs
 
 DESCRIPTION="CVM modules for unix and pwfile, plus testclient"
@@ -14,7 +16,7 @@ KEYWORDS="x86 amd64 ~sparc ~ppc"
 IUSE="mysql postgres sqlite3 vpopmail"
 
 RDEPEND="virtual/libc
-	>=dev-libs/bglibs-2.01"
+	>=dev-libs/bglibs-2.01:2"
 DEPEND="${RDEPEND}
 	sys-devel/libtool
 	mysql? ( virtual/mysql )
