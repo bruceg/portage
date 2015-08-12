@@ -1,0 +1,14 @@
+>bin
+c:::755::sysloglread
+c:::755::sysloglwrite
+c:::755::sysloguread
+c:::755::sysloguwrite
+c:::755::syslogxlate
+
+>man
+d:::755:man1
+c:::644:man1:sysloglread.1
+c:::644:man1:sysloglwrite.1
+c:::644:man1:sysloguread.1
+c:::644:man1:sysloguwrite.1
+c:::644:man1:syslogxlate.1

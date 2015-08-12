@@ -10,16 +10,17 @@ SLOT="0"
 KEYWORDS="x86 amd64 sparc"
 IUSE=""
 
-DEPEND=">=dev-libs/bglibs-0.19:0"
-RDEPEND="${DEPEND}
-	>=sys-process/supervise-scripts-3.5"
+DEPEND=">=dev-libs/bglibs-2.0:2"
+RDEPEND=">=sys-process/supervise-scripts-3.5"
 PROVIDE="virtual/logger"
 
-src_compile() {
+src_prepare() {
 	echo "$(tc-getCC) ${CFLAGS}" >conf-cc
 	echo "$(tc-getCC) ${LDFLAGS}" >conf-ld
-	echo /usr/lib/bglibs/include >conf-bgincs
-	echo /usr/lib/bglibs/lib >conf-bglibs
+	sed -ie 's/ -lbg-sysdeps//' Makefile
+}
+
+src_compile() {
 	emake programs || die "compile problem"
 }
 
@@ -30,10 +31,9 @@ newrun() {
 }
 
 src_install() {
-	echo ${D}/usr/bin >conf-bin
-	echo ${D}/usr/share/man >conf-man
-	dodir /usr/bin
-	make install
+	echo /usr/bin >conf-bin
+	echo /usr/share/man >conf-man
+	env install_prefix=${D} bg-installer < ${FILESDIR}/INSTHIER || die "Could not install files"
 
 	newrun sysloglread.run /var/service/sysloglread
 	newrun sysloglread-log.run /var/service/sysloglread/log
