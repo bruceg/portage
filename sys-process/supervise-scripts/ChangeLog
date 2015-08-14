@@ -1,0 +1,3 @@
+  14 Aug 2015; Bruce Guenter <bruce@gentoo.org> +metadata.xml,
+  supervise-scripts-4.0-r2.ebuild:
+  sys-process/supervise-scripts:  Depend on virtual/daemontools
