@@ -1,0 +1,53 @@
+diff --git a/rbldnsd.c b/rbldnsd.c
+index abf1d01..6c4c2a1 100644
+--- a/rbldnsd.c
++++ b/rbldnsd.c
+@@ -682,13 +682,25 @@ struct dnsstats gstats;
+ static struct dnsstats gptot;
+ static time_t stats_time;
+ 
++static FILE *open_stats(void) {
++  return (statsfile[0] == '-' && statsfile[1] == 0)
++    ? stdout
++    : fopen(statsfile, "a");
++}
++
++static void close_stats(FILE *f) {
++  if (f)
++    if (f != stdout)
++      fclose(f);
++}
++
+ static void dumpstats(void) {
+   struct dnsstats tot;
+   char name[DNS_MAXDOMAIN+1];
+   FILE *f;
+   struct zone *z;
+ 
+-  f = fopen(statsfile, "a");
++  f = open_stats();
+ 
+   if (f)
+     fprintf(f, "%ld", (long)time(NULL));
+@@ -720,7 +732,7 @@ static void dumpstats(void) {
+       delta(q_ok), delta(q_nxd),
+       delta(b_in), delta(b_out));
+ #undef delta
+-    fclose(f);
++    close_stats(f);
+   }
+   if (stats_relative)
+     gptot = tot;
+@@ -728,10 +740,10 @@ static void dumpstats(void) {
+ }
+ 
+ static void dumpstats_z(void) {
+-  FILE *f = fopen(statsfile, "a");
++  FILE *f = open_stats();
+   if (f) {
+     fprintf(f, "%ld\n", (long)time(NULL));
+-    fclose(f);
++    close_stats(f);
+   }
+ }
+ 
