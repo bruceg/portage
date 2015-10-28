@@ -1,8 +1,17 @@
+From 20a45e055d86c5655b74787b74ed78f13a6766da Mon Sep 17 00:00:00 2001
+From: Bruce Guenter <bruce@untroubled.org>
+Date: Wed, 28 Oct 2015 15:42:41 -0600
+Subject: [PATCH] Allow writing stats to stdout with option -s -
+
+---
+ rbldnsd.c | 23 +++++++++++++++++++----
+ 1 file changed, 19 insertions(+), 4 deletions(-)
+
 diff --git a/rbldnsd.c b/rbldnsd.c
-index abf1d01..6c4c2a1 100644
+index abf1d01..f9c4356 100644
 --- a/rbldnsd.c
 +++ b/rbldnsd.c
-@@ -682,13 +682,25 @@ struct dnsstats gstats;
+@@ -682,13 +682,28 @@ struct dnsstats gstats;
  static struct dnsstats gptot;
  static time_t stats_time;
  
@@ -13,9 +22,12 @@ index abf1d01..6c4c2a1 100644
 +}
 +
 +static void close_stats(FILE *f) {
-+  if (f)
-+    if (f != stdout)
++  if (f) {
++    if (f == stdout)
++      fflush(f);
++    else
 +      fclose(f);
++  }
 +}
 +
  static void dumpstats(void) {
@@ -29,7 +41,7 @@ index abf1d01..6c4c2a1 100644
  
    if (f)
      fprintf(f, "%ld", (long)time(NULL));
-@@ -720,7 +732,7 @@ static void dumpstats(void) {
+@@ -720,7 +735,7 @@ static void dumpstats(void) {
        delta(q_ok), delta(q_nxd),
        delta(b_in), delta(b_out));
  #undef delta
@@ -38,7 +50,7 @@ index abf1d01..6c4c2a1 100644
    }
    if (stats_relative)
      gptot = tot;
-@@ -728,10 +740,10 @@ static void dumpstats(void) {
+@@ -728,10 +743,10 @@ static void dumpstats(void) {
  }
  
  static void dumpstats_z(void) {
@@ -51,3 +63,6 @@ index abf1d01..6c4c2a1 100644
    }
  }
  
+-- 
+2.6.2
+
