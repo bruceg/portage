@@ -34,7 +34,7 @@ src_compile() {
 	if use mysql; then
 		emake -j1 mysql || die
 	fi
-	if use postgresql; then
+	if use postgres; then
 		emake -j1 pgsql || die
 	fi
 	if use vpopmail; then
