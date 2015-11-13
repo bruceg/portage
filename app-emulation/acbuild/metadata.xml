@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<longdescription lang="en">
+		acbuild is a command line utility to build and modify App Container Images (ACIs), the container image format defined in the App Container (appc) spec.
+	</longdescription>
+	<maintainer>
+		<email>maintainer-needed@gentoo.org</email>
+	</maintainer>
+	<upstream>
+		<remote-id type="github">appc/acbuild</remote-id>
+	</upstream>
+</pkgmetadata>
