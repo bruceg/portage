@@ -1,5 +1,6 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
 inherit eutils flag-o-matic autotools
 
@@ -11,13 +12,13 @@ SLOT="0"
 LICENSE="GPL-2"
 KEYWORDS="amd64 x86"
 
-IUSE="tls"
+IUSE="ssl"
 
 DEPEND="sys-apps/groff
-	tls? ( net-libs/gnutls )"
+	ssl? ( net-libs/gnutls )"
 RDEPEND="virtual/shadow
 	virtual/logger
-	tls? ( net-libs/gnutls )
+	ssl? ( net-libs/gnutls )
 	!mail-mta/courier
 	!mail-mta/esmtp
 	!mail-mta/exim
@@ -31,8 +32,8 @@ RDEPEND="virtual/shadow
 	!mail-mta/ssmtp"
 
 src_unpack() {
-	unpack ${P}.tar.gz
-	cd ${S}
+	unpack "$P".tar.gz
+	cd "$S"
 	eautoreconf
 }
 
@@ -43,7 +44,7 @@ pkg_setup() {
 
 src_compile() {
 	opts=""
-	if use tls; then
+	if use ssl; then
 		opts="$opts --enable-tls"
 	fi
 	econf $opts --localstatedir=/var || die "econf failed"
