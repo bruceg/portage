@@ -1,5 +1,6 @@
-*gimp-gmic-1.6.8 (18 Dec 2015)
+*gimp-gmic-1.6.9 (18 Feb 2016)
 
-  18 Dec 2015; Bruce Guenter <bruce@gentoo.org>
-  +files/gmic-1.6.8-makefile.patch, +gimp-gmic-1.6.8.ebuild, +metadata.xml:
-  media-plugins/gimp-gmic: Version bump to 1.6.8
+  18 Feb 2016; Bruce Guenter <bruce@gentoo.org>
+  +files/gmic-1.6.9-makefile.patch, +gimp-gmic-1.6.9.ebuild, -ChangeLog,
+  -files/gmic-1.6.8-makefile.patch, -gimp-gmic-1.6.8.ebuild, metadata.xml:
+  media-plugins/gimp-gmic: Bump version to 1.6.9
