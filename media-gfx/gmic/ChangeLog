@@ -1,5 +1,6 @@
-*gmic-1.6.8 (18 Dec 2015)
+*gmic-1.6.9 (18 Feb 2016)
 
-  18 Dec 2015; Bruce Guenter <bruce@gentoo.org>
-  +files/gmic-1.6.8-makefile.patch, +gmic-1.6.8.ebuild, +metadata.xml:
-  media-gfx/gmic: Version bump to 1.6.8
+  18 Feb 2016; Bruce Guenter <bruce@gentoo.org>
+  +files/gmic-1.6.9-makefile.patch, +gmic-1.6.9.ebuild, -ChangeLog,
+  -files/gmic-1.6.8-makefile.patch, -gmic-1.6.8.ebuild, metadata.xml:
+  media-gfx/gmic: Bump version to 1.6.9
