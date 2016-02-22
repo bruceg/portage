@@ -1,0 +1,6 @@
+*queue-repair-0.9.0-r1 (22 Feb 2016)
+
+  22 Feb 2016; Bruce Guenter <bruce@gentoo.org>
+  +files/queue-repair-0.9.0-python3.patch, +metadata.xml,
+  +queue-repair-0.9.0-r1.ebuild:
+  net-mail/queue-repair: Add patch to upstream for Python 3 compatibility

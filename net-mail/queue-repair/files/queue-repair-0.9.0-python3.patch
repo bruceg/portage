@@ -1,0 +1,202 @@
+--- queue_repair.py.bak	2003-10-22 09:54:13.000000000 -0600
++++ queue_repair.py	2016-02-22 14:15:37.883054133 -0600
+@@ -1,4 +1,5 @@
+ #!/usr/bin/python
++from __future__ import print_function
+ '''queue_repair.py - qmail tools in Python.
+ Copyright (C) 2001 Charles Cazabon <pqt @ discworld.dyndns.org>
+ 
+@@ -66,24 +67,24 @@
+     #   key: pathname - all paths are relative to conf-qmail
+     #   data: (user, group, mode, split)
+     #       split is:  0 : no, 1 : yes, -1 : only with big-todo
+-    'queue' :           ('qmailq', 'qmail', 0750, 0),
+-    'queue/bounce' :    ('qmails', 'qmail', 0700, 0),
+-    'queue/info' :      ('qmails', 'qmail', 0700, 1),
+-    'queue/intd' :      ('qmailq', 'qmail', 0700, -1),
+-    'queue/local' :     ('qmails', 'qmail', 0700, 1),
+-    'queue/lock' :      ('qmailq', 'qmail', 0750, 0),
+-    'queue/mess' :      ('qmailq', 'qmail', 0750, 1),
+-    'queue/pid' :       ('qmailq', 'qmail', 0700, 0),
+-    'queue/remote' :    ('qmails', 'qmail', 0700, 1),
+-    'queue/todo' :      ('qmailq', 'qmail', 0750, -1),
++    'queue' :           ('qmailq', 'qmail', 0o750, 0),
++    'queue/bounce' :    ('qmails', 'qmail', 0o700, 0),
++    'queue/info' :      ('qmails', 'qmail', 0o700, 1),
++    'queue/intd' :      ('qmailq', 'qmail', 0o700, -1),
++    'queue/local' :     ('qmails', 'qmail', 0o700, 1),
++    'queue/lock' :      ('qmailq', 'qmail', 0o750, 0),
++    'queue/mess' :      ('qmailq', 'qmail', 0o750, 1),
++    'queue/pid' :       ('qmailq', 'qmail', 0o700, 0),
++    'queue/remote' :    ('qmails', 'qmail', 0o700, 1),
++    'queue/todo' :      ('qmailq', 'qmail', 0o750, -1),
+ }
+ 
+ nondirs = {
+     # Files to check; format is:
+     #   key: pathname - all paths are relative to conf-qmail
+     #   data: (user, group, mode)
+-    'queue/lock/sendmutex' :    ('qmails', 'qmail', 0600),
+-    'queue/lock/tcpto' :        ('qmailr', 'qmail', 0644),
++    'queue/lock/sendmutex' :    ('qmails', 'qmail', 0o600),
++    'queue/lock/tcpto' :        ('qmailr', 'qmail', 0o644),
+ }
+ 
+ 
+@@ -105,7 +106,7 @@
+     while i <= max:
+         for p in primelist:
+             if (i % p == 0) or (p * p > i): break
+-        if (i % p <> 0):
++        if (i % p != 0):
+             primelist.append(i)
+             if i >= min:
+                 result.append(i)
+@@ -151,9 +152,7 @@
+     '''
+     global users, groups
+     msg('finding qmail UIDs/GIDs...')
+-    us = users.keys()
+-    gs = groups.keys()
+-    for u in us:
++    for u in users:
+         if users[u]:
+             # Handle case of someone else determining UIDs for us
+             msg('  %-7s preset as UID %i' % (u, users[u]))
+@@ -163,7 +162,7 @@
+         except KeyError:
+             err('no uid for %s' % u)
+         msg('  %-7s : UID %i' % (u, users[u]))
+-    for g in gs:
++    for g in groups:
+         if groups[g]:
+             # Handle case of someone else determining GIDs for us
+             msg('  %-7s preset as GID %i' % (g, groups[g]))
+@@ -182,7 +181,7 @@
+     that it has octal mode mode.  If testmode is set, create path if it
+     doesn't exist.
+     '''
+-    if checked_dir.has_key(path):
++    if path in checked_dir:
+         return
+     msg('  checking directory %s...' % path)
+     if not os.path.exists(path):
+@@ -208,7 +207,7 @@
+ 
+     Verify path is owned by user:group, and make it so if testmode is not set.
+     '''
+-    if checked_owner.has_key(path):
++    if path in checked_owner:
+         return
+     uid = users[user]
+     gid = groups[group]
+@@ -223,7 +222,7 @@
+                 msg('  fixed, %s ownership %i:%i' % (path, s[ST_UID], s[ST_GID]))
+             else:
+                 msg('  testmode, not fixing')
+-    except OSError, o:
++    except OSError as o:
+         err(o or '[no error message]')
+     checked_owner[path] = None
+ 
+@@ -233,7 +232,7 @@
+ 
+     Verify path has mode mode, and make it so if testmode is not set.
+     '''
+-    if checked_mode.has_key(path):
++    if path in checked_mode:
+         return
+     try:
+         s = os.stat(path)
+@@ -247,7 +246,7 @@
+                 msg('  changed %s mode to %o' % (path, newmode))
+             else:
+                 msg('  testmode, not fixing')
+-    except OSError, o:
++    except OSError as o:
+         err(o or '[no error message]')
+     checked_mode[path] = None
+ 
+@@ -311,7 +310,7 @@
+         else:
+             msg('  found unexpected direntry %s' % p)
+ 
+-    if splits == range(split):
++    if splits == list(range(split)):
+         # big-todo apparently in use
+         bigtodo = 1
+         msg('  big-todo found')
+@@ -330,7 +329,7 @@
+     Verify ownership, mode, and contents of each queue directory in paths.
+     '''
+     msg('checking main queue directories...')
+-    _dirs = paths.keys()
++    _dirs = list(paths.keys())
+     _dirs.sort()
+     for path in _dirs:
+         (user, group, mode, is_split) = paths[path]
+@@ -345,7 +344,7 @@
+         if not this_split:
+             splits = []
+         else:
+-            splits = range(split)
++            splits = list(range(split))
+             for i in splits:
+                 splitpath = os.path.join(path, str(i))
+                 check_dir(splitpath, user, group, mode)
+@@ -467,7 +466,7 @@
+     if not os.path.exists(path) and not testmode:
+         os.mkfifo(path)
+     chown(path, user, group)
+-    chmod(path, 0622)
++    chmod(path, 0o622)
+ 
+ #######################################
+ def check_messages(path, split):
+@@ -549,12 +548,12 @@
+             # Nothing in these directories to check at this point
+             continue
+         elif path in ('queue/mess', 'queue/todo'):
+-            mode = 0644
++            mode = 0o644
+         else:
+-            mode = 0600
++            mode = 0o600
+         this_split = is_splitdir(is_split, bigtodo)
+         if this_split:
+-            splits = range(split)
++            splits = list(range(split))
+         else:
+             splits = ['']
+         for splitval in splits:
+@@ -635,7 +634,7 @@
+     wd = os.getcwd()
+     try:
+         os.chdir(qmaildir)
+-    except StandardError:
++    except:
+         err('failed to chdir to %s' % qmaildir)
+ 
+     if testmode:
+@@ -747,7 +746,7 @@
+                     if force_split < 1:
+                         raise ValueError
+                 except ValueError:
+-                    raise getopt.error, 'split value must be a positive integer (%s)' % value
++                    raise getopt.error('split value must be a positive integer (%s)' % value)
+             elif option in ('-n', '--no-bigtodo'):
+                 force_bigtodo = -1
+             elif option in ('-b', '--bigtodo'):
+@@ -765,10 +764,10 @@
+                 create = 1
+         if args:
+             if len(args) > 1:
+-                raise getopt.error, 'conf-qmail must be a single argument (%s)' % string.join(args)
++                raise getopt.error('conf-qmail must be a single argument (%s)' % string.join(args))
+             qmaildir = args[0]
+ 
+-    except getopt.error, o:
++    except getopt.error as o:
+         err('Error:  %s' % o, showhelp=1)
+ 
+     check_queue(qmaildir, test, force_split, force_bigtodo, create, mathishard)
