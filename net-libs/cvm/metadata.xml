@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+  <longdescription lang="en">
+  Credential Validation Modules
+  </longdescription>
+  <maintainer>
+    <email>bruce@untroubled.org</email>
+    <name>Bruce Guenter</name>
+  </maintainer>
+  <use>
+    <flag name="vpopmail">Enable vpopmail support</flag>
+  </use>
+</pkgmetadata>
