@@ -1,7 +1,0 @@
-#!/bin/sh
-exec &>/dev/null
-
-. /etc/conf.d/ntpd
-
-exec \
-multilog t ${MULTILOG_OPTS} /var/log/ntpd
