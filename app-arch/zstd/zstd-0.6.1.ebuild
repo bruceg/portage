@@ -19,11 +19,15 @@ DEPEND=""
 RDEPEND="${DEPEND}"
 
 src_compile() {
-	make CC="$(tc-getCC)" CFLAGS="$CFLAGS" LDFLAGS="$LDFLAGS" || die
+	CC="$(tc-getCC)"
+	emake -C lib libzstd CC="$CC" CFLAGS="$CFLAGS" LDFLAGS="$LDFLAGS"
+	# Prevent make install from rebuilding the libs
+	touch lib/libzstd
+
+	emake -C programs zstd CC="$CC" CFLAGS="$CFLAGS" LDFLAGS="$LDFLAGS"
 }
 
 src_install() {
-	# The install target recompiles the libs, so it needs the CC settings too
-	make install PREFIX=/usr DESTDIR="$D" CC="$(tc-getCC)" CFLAGS="$CFLAGS" LDFLAGS="$LDFLAGS" || die
+	emake install PREFIX=/usr DESTDIR="$D"
 	dodoc NEWS README.md
 }
