@@ -32,6 +32,8 @@ src_prepare() {
 	[[ -x /sbin/paxctl ]] && \
 		sed -i -e '/^&& .\/curve25519/i&& paxctl -m curve25519.impl.check \\' $CURVE25519/curve25519.impl.do
 	sed -i -e 's/) >/) -fPIC >/g' $CURVE25519/Makefile
+	# Large packets break delivery on mixed-MTU networks
+	sed -i -e 's/MAX_PACKET 8192/MAX_PACKET 1400/' srlog2.h
 }
 
 src_compile() {
