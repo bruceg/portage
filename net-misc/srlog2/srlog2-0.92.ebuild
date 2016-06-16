@@ -1,4 +1,6 @@
-# $Header: $
+# Copyright 1999-2016 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+# $Id$
 
 EAPI=5
 
@@ -6,6 +8,7 @@ inherit eutils toolchain-funcs
 
 DESCRIPTION="Secure log transmission system"
 SRC_URI="http://untroubled.org/${PN}/archive/${P}.tar.gz"
+CURVE25519=curve25519-20050915
 
 SLOT="0"
 LICENSE="GPL-2"
@@ -19,10 +22,7 @@ DEPEND="${RDEPEND}"
 
 PROVIDE=""
 
-src_unpack() {
-	cd ${WORKDIR}
-	unpack ${A}
-	cd ${S}
+src_prepare() {
 	echo "$(tc-getCC) ${CFLAGS}" >conf-cc
 	echo "$(tc-getCC) ${CFLAGS} -s" >conf-ld
 	echo "/usr/bin" >conf-bin
@@ -30,12 +30,11 @@ src_unpack() {
 	echo /etc/srlog2 >conf-etc
 
 	[[ -x /sbin/paxctl ]] && \
-		sed -i -e '/^&& .\/curve25519/i&& paxctl -m curve25519.impl.check \\' curve25519/curve25519.impl.do
-	sed -i -e 's/) >/) -fPIC >/g' curve25519/Makefile
+		sed -i -e '/^&& .\/curve25519/i&& paxctl -m curve25519.impl.check \\' $CURVE25519/curve25519.impl.do
+	sed -i -e 's/) >/) -fPIC >/g' $CURVE25519/Makefile
 }
 
 src_compile() {
-	cd ${S}
 	emake all || die
 
 	[[ -x /sbin/paxctl ]] && \
@@ -43,7 +42,7 @@ src_compile() {
 }
 
 src_install() {
-	make install install_prefix=${D}
+	make install install_prefix="$D"
 
 	dodir /etc/srlog2
 	dodir /etc/srlog2/env
@@ -58,7 +57,7 @@ pkg_postinst() {
 
 pkg_config() {
 	for key in curve25519 nistp224; do
-		if ! [ -e ${ROOT}/etc/srlog2/$key ]; then
+		if ! [ -e "$ROOT"/etc/srlog2/$key ]; then
 			srlog2-keygen -t $key /etc/srlog2
 		fi
 	done
