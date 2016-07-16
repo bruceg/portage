@@ -29,5 +29,5 @@ src_compile() {
 
 src_install() {
 	emake install PREFIX=/usr DESTDIR="$D"
-	dodoc NEWS README.md
+	dodoc NEWS README.md zstd_compression_format.md
 }
