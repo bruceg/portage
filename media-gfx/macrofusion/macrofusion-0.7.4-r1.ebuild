@@ -1,4 +1,4 @@
-# Copyright 1999-2011 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -16,7 +16,7 @@ IUSE=""
 DEPEND=""
 RDEPEND="${DEPEND}
 	>=dev-lang/python-2.7
-	virtual/python-imaging
+	dev-python/pillow
 	dev-python/pygtk
 	>=dev-python/pyexiv2-0.3
 	>=gnome-base/libglade-2.0
@@ -38,7 +38,7 @@ src_install() {
 	doins images/logoSplash.png
 
 	insinto /usr/share/locale
-	cp -a locale/* ${D}/usr/share/locale/
+	cp -a locale/* "$D"/usr/share/locale/
 
 	dodoc CHANGELOG README TODO
 }
