@@ -1,0 +1,16 @@
+diff --git a/programs/Makefile b/programs/Makefile
+index 6e78d0e..993d138 100644
+--- a/programs/Makefile
++++ b/programs/Makefile
+@@ -21,11 +21,7 @@ MANDIR  = $(PREFIX)/share/man/man1
+ 
+ ZSTDDIR = ../lib
+ 
+-ifeq ($(shell $(CC) -v 2>&1 | grep -c "gcc version "), 1)
+-ALIGN_LOOP = -falign-loops=32
+-else
+ ALIGN_LOOP =
+-endif
+ 
+ CPPFLAGS= -I$(ZSTDDIR) -I$(ZSTDDIR)/common -I$(ZSTDDIR)/dictBuilder
+ CFLAGS ?= -O3
