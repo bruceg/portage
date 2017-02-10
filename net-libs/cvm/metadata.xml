@@ -4,7 +4,7 @@
   <longdescription lang="en">
   Credential Validation Modules
   </longdescription>
-  <maintainer>
+  <maintainer type="person">
     <email>bruce@untroubled.org</email>
     <name>Bruce Guenter</name>
   </maintainer>

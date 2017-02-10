@@ -1,4 +1,4 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -19,7 +19,7 @@ RDEPEND="virtual/libc
 	>=dev-libs/bglibs-2.01:2"
 DEPEND="${RDEPEND}
 	sys-devel/libtool
-	mysql? ( virtual/mysql )
+	mysql? ( virtual/libmysqlclient )
 	postgres? ( dev-db/postgresql )
 	vpopmail? ( net-mail/vpopmail )
 	sqlite? ( =dev-db/sqlite-3* )"
