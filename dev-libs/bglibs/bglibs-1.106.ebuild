@@ -10,7 +10,7 @@ SRC_URI="http://untroubled.org/bglibs/archive/${P}.tar.gz"
 
 SLOT="0"
 LICENSE="GPL-2"
-KEYWORDS="x86 sparc ~mips ~alpha ~ppc ~arm amd64 ~hppa"
+KEYWORDS="~x86 ~sparc ~mips ~alpha ~ppc ~arm ~amd64 ~hppa"
 
 RDEPEND="virtual/libc"
 DEPEND="${RDEPEND}
