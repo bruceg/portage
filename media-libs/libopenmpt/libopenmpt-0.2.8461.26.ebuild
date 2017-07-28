@@ -1,15 +1,17 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
 EAPI=6
 
-SV="${PV%.*.*}-beta${PV#*.*.*.}"
+beta="${PV#*.*.*.}"
+MV="${PV%.$beta}"
+SV="${MV}-beta$beta"
 
 DESCRIPTION="library to decode tracked music files (modules)"
 HOMEPAGE="https://lib.openmpt.org/libopenmpt/"
 SRC_URI="https://lib.openmpt.org/files/libopenmpt/src/${PN}-${SV}.tar.gz"
-S="$WORKDIR/${PN}-${PV%.*.*}"
+S="$WORKDIR/${PN}-${MV}"
 
 LICENSE="BSD"
 SLOT="0"
