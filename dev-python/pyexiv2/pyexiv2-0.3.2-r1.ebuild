@@ -2,10 +2,10 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="4"
-PYTHON_DEPEND="2:2.6"
+EAPI=6
+PYTHON_COMPAT=( python2_7 )
 
-inherit eutils versionator scons-utils python multilib
+inherit eutils versionator scons-utils python-single-r1 multilib
 
 MY_PV=$(get_version_component_range 1-2)
 DESCRIPTION="Python binding to exiv2"
@@ -22,13 +22,8 @@ DEPEND=">=media-gfx/exiv2-0.20
 	>=dev-libs/boost-1.49.0-r2[python]"
 RDEPEND="${DEPEND}"
 
-#src_prepare() {
-#	epatch "${FILESDIR}"/${P}-docs.patch
-#}
-
 src_compile() {
-
-	escons lib BOOSTLIB=boost_python-${PYTHON_ABI} || die
+	escons lib BOOSTLIB=boost_python-2.7 || die
 	if use doc; then
 		escons doc || die
 
@@ -38,7 +33,7 @@ src_compile() {
 }
 
 src_install() {
-	escons DESTDIR="${D}" BOOSTLIB=boost_python-${PYTHON_ABI} install || die
+	escons DESTDIR="${D}" BOOSTLIB=boost_python-2.7 install || die
 	dodoc NEWS README todo || die
 
 	if use examples; then
@@ -50,12 +45,6 @@ src_install() {
 		insinto /usr/share/doc/${PF}/
 		doins -r doc/html || die  # no dohtml due to mixed content
 	fi
-}
 
-pkg_postinst() {
-	python_mod_optimize ${PN}
-}
-
-pkg_postrm() {
-	python_mod_cleanup ${PN}
+	python_optimize
 }
