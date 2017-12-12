@@ -20,7 +20,7 @@ DEPEND="${RDEPEND}
 src_compile() {
 	echo /usr/bin >conf-bin
 	echo /usr/include > conf-include
-	echo /usr/lib > conf-lib
+	echo /usr/$(get_libdir) > conf-lib
 	echo /usr/share/man >conf-man
 	echo "$(tc-getCC) ${CFLAGS} -g" > conf-cc
 	echo "$(tc-getCC) ${LDFLAGS} -s" > conf-ld
