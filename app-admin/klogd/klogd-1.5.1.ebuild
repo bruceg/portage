@@ -1,36 +1,22 @@
-inherit eutils
+EAPI=5
 
-CVS_DATE=${PV#*_pre}
-MY_P=sysklogd-1.4.1
+inherit eutils user
+
+MY_P="sysklogd-${PV}"
+S="$WORKDIR/$MY_P"
 
 DESCRIPTION="Kernel log daemon"
 HOMEPAGE="http://www.infodrom.org/projects/sysklogd/"
-SRC_URI="ftp://metalab.unc.edu/pub/Linux/system/daemons/${MY_P}.tar.gz
-	mirror://gentoo/${MY_P}-cvs-${CVS_DATE}.patch.bz2"
+SRC_URI="http://www.infodrom.org/projects/sysklogd/download/${MY_P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="alpha amd64 hppa ia64 mips ppc ppc64 s390 sparc x86"
 IUSE=""
 RESTRICT="test"
-S="${WORKDIR}/${MY_P}"
 
 DEPEND=""
 RDEPEND="sys-process/supervise-scripts"
-PROVIDE="virtual/logger"
-
-src_unpack() {
-	unpack ${A}
-
-	cd "${S}"
-	epatch "${WORKDIR}"/${MY_P}-cvs-${CVS_DATE}.patch
-	epatch "${FILESDIR}/klogd-nofork.patch"
-	epatch "${FILESDIR}"/sysklogd-${PV}-2.6.headers.patch
-
-	sed -i \
-		-e "s:-O3:${CFLAGS} -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE:" \
-		Makefile || die "sed CFLAGS"
-}
 
 pkg_setup() {
 	enewgroup kernelog || die "Problem adding kernelog group"
@@ -38,7 +24,7 @@ pkg_setup() {
 }
 
 src_compile() {
-	emake klogd LDFLAGS="" || die
+	emake klogd || die
 }
 
 src_install() {
