@@ -1,4 +1,4 @@
-# Copyright 1999-2003 Gentoo Technologies, Inc.
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 inherit fixheadtails eutils toolchain-funcs
@@ -31,13 +31,13 @@ src_test() {
 }
 
 src_install () {
-	emake install_prefix=${D} install || die "install failed"
+	emake install_prefix="$D" install || die "install failed"
 
 	#make backwards compatible symlinks
 	dosym . /usr/lib/bglibs/lib
 
 	# Remove bits that conflict with bglibs:2
-	rm -rf ${D}/usr/include ${D}/usr/bin ${D}/usr/share/man/man1
+	rm -rf "$D"/usr/include "$D"/usr/bin "$D"/usr/share/man/man1
 
 	dodoc ANNOUNCEMENT NEWS README ChangeLog TODO VERSION
 	docinto html
@@ -46,7 +46,7 @@ src_install () {
 	dodoc doc/latex/*
 
 	dodir /etc/env.d
-	echo LDPATH=/usr/lib/bglibs >"${D}/etc/env.d/99bglibs"
+	echo LDPATH=/usr/lib/bglibs >""$D"/etc/env.d/99bglibs"
 }
 
 pkg_postinst() {
