@@ -1,6 +1,5 @@
 # Copyright 1999-2003 Gentoo Technologies, Inc.
 # Distributed under the terms of the GNU General Public License v2
-# $Header$
 
 inherit fixheadtails eutils toolchain-funcs
 
@@ -35,7 +34,7 @@ src_test() {
 src_install () {
 	emake install_prefix=${D} install || die "install failed"
 
-	dodoc ANNOUNCEMENT COPYING NEWS README ChangeLog TODO VERSION
+	dodoc ANNOUNCEMENT NEWS README ChangeLog TODO VERSION
 	docinto html
 	dodoc doc/html/*
 	docinto latex

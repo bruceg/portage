@@ -1,6 +1,5 @@
 # Copyright 1999-2003 Gentoo Technologies, Inc.
 # Distributed under the terms of the GNU General Public License v2
-# $Header$
 
 inherit fixheadtails eutils toolchain-funcs
 
@@ -40,7 +39,7 @@ src_install () {
 	# Remove bits that conflict with bglibs:2
 	rm -rf ${D}/usr/include ${D}/usr/bin ${D}/usr/share/man/man1
 
-	dodoc ANNOUNCEMENT COPYING NEWS README ChangeLog TODO VERSION
+	dodoc ANNOUNCEMENT NEWS README ChangeLog TODO VERSION
 	docinto html
 	dodoc doc/html/*
 	docinto latex
