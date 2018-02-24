@@ -1,3 +1,6 @@
+# Copyright 1999-2018 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+
 inherit toolchain-funcs
 
 DESCRIPTION="Mail server network protocol front-ends"
@@ -32,14 +35,14 @@ src_compile() {
 
 src_install() {
 	dodir /var/qmail/bin
-	make install_prefix=${D} install || die
+	make install_prefix="$D" install || die
 
 	exeinto /var/qmail/supervise/qmail-smtpd
-	newexe ${FILESDIR}/run-smtpfront run.mailfront
+	newexe "$FILESDIR"/run-smtpfront run.mailfront
 	exeinto /var/qmail/supervise/qmail-pop3d
-	newexe ${FILESDIR}/run-pop3front run.mailfront
+	newexe "$FILESDIR"/run-pop3front run.mailfront
 
-	dodoc ANNOUNCEMENT COPYING ChangeLog NEWS README VERSION
+	dodoc ANNOUNCEMENT ChangeLog NEWS README VERSION
 	dohtml *.html
 }
 
