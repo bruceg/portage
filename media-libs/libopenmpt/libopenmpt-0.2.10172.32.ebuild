@@ -12,7 +12,7 @@ SV="${MV}-beta$beta"
 DESCRIPTION="library to decode tracked music files (modules)"
 HOMEPAGE="https://lib.openmpt.org/libopenmpt/"
 SRC_URI="https://lib.openmpt.org/files/libopenmpt/src/${PN}-${SV}-autotools.tar.gz"
-S="$WORKDIR/${PN}-0.2.10050-autotools" # Broken tarball for this version
+S="$WORKDIR/${PN}-0.2.10173-autotools" # Broken tarball for this version
 
 LICENSE="BSD"
 SLOT="0"
