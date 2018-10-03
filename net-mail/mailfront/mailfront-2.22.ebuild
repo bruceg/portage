@@ -1,6 +1,8 @@
 # Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
+EAPI=6
+
 inherit toolchain-funcs
 
 DESCRIPTION="Mail server network protocol front-ends"
@@ -9,14 +11,15 @@ SRC_URI="${HOMEPAGE}/archive/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="x86 amd64 ~sparc ~ppc"
+KEYWORDS="amd64 ~ppc ~sparc x86"
 IUSE="lua ssl"
 
 RDEPEND="virtual/libc
-	>=dev-libs/bglibs-2.03
+	>=dev-libs/bglibs-2.04
 	>=net-libs/cvm-0.97
 	ssl? ( net-libs/gnutls )
-	lua? ( dev-lang/lua )"
+	lua? ( dev-lang/lua:0 )
+"
 DEPEND="${RDEPEND}"
 
 src_compile() {
