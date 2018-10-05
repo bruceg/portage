@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -11,16 +11,18 @@ SRC_URI="https://github.com/facebook/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="|| ( BSD GPL-2 )"
 SLOT="0/1"
-KEYWORDS="amd64 ~arm ~arm64 ~ia64 ~mips ~ppc ~ppc64 ~sparc x86"
-IUSE="static-libs"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~ia64 ~mips ~ppc ~ppc64 ~sparc x86"
+IUSE="lz4 static-libs"
 
-RDEPEND="app-arch/xz-utils"
+RDEPEND="app-arch/xz-utils
+	lz4? ( app-arch/lz4 )"
 DEPEND="${RDEPEND}"
 
 src_compile() {
 	emake \
 		CC="$(tc-getCC)" \
 		AR="$(tc-getAR)" \
+		HAVE_LZ4=$(usex lz4 1 0) \
 		PREFIX="${EPREFIX}/usr" \
 		LIBDIR="${EPREFIX}/usr/$(get_libdir)" zstd
 
@@ -37,6 +39,13 @@ src_compile() {
 		PREFIX="${EPREFIX}/usr" \
 		LIBDIR="${EPREFIX}/usr/$(get_libdir)"
 
+	emake -C tests \
+		CC="$(tc-getCC)" \
+		CXX="$(tc-getCXX)" \
+		AR="$(tc-getAR)" \
+		PREFIX="${EPREFIX}/usr" \
+		LIBDIR="${EPREFIX}/usr/$(get_libdir)" \
+		paramgrill
 }
 
 src_install() {
@@ -49,6 +58,8 @@ src_install() {
 		DESTDIR="${D}" \
 		PREFIX="${EPREFIX}/usr" \
 		LIBDIR="${EPREFIX}/usr/$(get_libdir)" install
+
+	newbin tests/paramgrill zstdparamgrill
 
 	einstalldocs
 
