@@ -1,5 +1,0 @@
-*acbuild-0.1.1 (13 Nov 2015)
-
-  13 Nov 2015; Bruce Guenter <bruce@gentoo.org> +acbuild-0.1.1.ebuild,
-  +metadata.xml:
-  app-emulation/acbuild: New ebuild for relase 0.1.1
