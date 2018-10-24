@@ -1,14 +1,18 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
 
 inherit multilib
 
+beta="${PV#*.*.*.}"
+MV="${PV%.$beta}"
+SV="${MV}-beta$beta"
+
 DESCRIPTION="library to decode tracked music files (modules)"
 HOMEPAGE="https://lib.openmpt.org/libopenmpt/"
-SRC_URI="https://lib.openmpt.org/files/libopenmpt/src/${P}+release.autotools.tar.gz"
-S="$WORKDIR/${P}+release.autotools"
+SRC_URI="https://lib.openmpt.org/files/libopenmpt/src/${PN}-${SV}-autotools.tar.gz"
+S="$WORKDIR/${PN}-0.2.10934-autotools" # Broken tarball for this version
 
 LICENSE="BSD"
 SLOT="0"
@@ -44,5 +48,5 @@ src_configure() {
 
 src_install() {
 	emake DESTDIR="$D" install
-	dodoc README.md libopenmpt/dox/*.md
+	dodoc README.md TODO libopenmpt/dox/*
 }
