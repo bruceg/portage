@@ -16,10 +16,10 @@ KEYWORDS="~amd64 ~x86"
 IUSE="doc flac ogg pulseaudio sdl sndfile static vorbis zlib"
 
 RDEPEND="
-	>=media-sound/mpg123-1.14
+	>=media-sound/mpg123-1.25.12
 	sys-devel/libtool
-	flac? ( media-libs/flac )
-	ogg? ( media-libs/libogg )
+	flac? ( >=media-libs/flac-1.3.3 )
+	ogg? ( >=media-libs/libogg-1.3.4 )
 	pulseaudio? ( media-sound/pulseaudio )
 	sdl? ( media-libs/libsdl )
 	sndfile? ( media-libs/libsndfile )
