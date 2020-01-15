@@ -10,7 +10,7 @@ DESCRIPTION="Simple yet powerful mailing list manager for qmail."
 SRC_URI="http://www.ezmlm.org/archive/${PV}/${P}.tar.gz"
 HOMEPAGE="http://www.ezmlm.org"
 SLOT="0"
-LICENSE="GPLv2"
+LICENSE="GPL-2"
 KEYWORDS="x86 ~alpha ~hppa ~amd64 ~ppc ~mips ~sparc"
 DEPEND="sys-apps/grep sys-apps/groff
 	mysql? ( dev-db/mysql )
