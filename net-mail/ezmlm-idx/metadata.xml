@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+  <maintainer type="person">
+    <email>bruce@untroubled.org</email>
+    <name>Bruce Guenter</name>
+  </maintainer>
+  <longdescription lang="en">
+    Simple yet powerful mailing list manager for qmail.
+  </longdescription>
+</pkgmetadata>
