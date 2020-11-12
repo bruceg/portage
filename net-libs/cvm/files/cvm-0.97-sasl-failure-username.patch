@@ -1,0 +1,95 @@
+diff --git a/sasl_auth.c b/sasl_auth.c
+index d0ec402..e2f01a7 100644
+--- a/sasl_auth.c
++++ b/sasl_auth.c
+@@ -34,6 +34,30 @@ int sasl_auth_caps(str* caps)
+   return 1;
+ }
+ 
++static int str_cats_escape(str* dest, const char* src)
++{
++  char ch;
++  while ((ch = *src++) != 0) {
++    if (!str_catc(dest, (ch >= 32 && ch <= 127) ? ch : '?'))
++      return 0;
++  }
++  return 1;
++}
++
++static void make_response(str* out, const char* username, const char* sys_user, const char* domain)
++{
++  str_copys(out, "username=");
++  str_cats_escape(out, username);
++  if (sys_user != NULL) {
++    str_cats(out, " sys_username=");
++    str_cats_escape(out, sys_user);
++  }
++  if (domain != NULL && domain[0] != 0) {
++    str_cats(out, " domain=");
++    str_cats_escape(out, domain);
++  }
++}
++
+ int sasl_auth2(struct sasl_auth* sa,
+ 	       const char* mechanism,
+ 	       const char* init_response)
+@@ -83,22 +107,20 @@ int sasl_auth2(struct sasl_auth* sa,
+       i = SASL_RESP_EOF;
+   }
+   if (i == SASL_AUTH_OK) {
+-    str_truncate(&response, 0);
+-    str_copys(&response, "username=");
+-    str_cats(&response, cvm_fact_username);
+-    if (cvm_fact_sys_username != 0) {
+-      str_cats(&response, " sys_username=");
+-      str_cats(&response, cvm_fact_sys_username);
+-    }
+-    if (cvm_fact_domain != 0 && cvm_fact_domain[0] != 0) {
+-      str_cats(&response, " domain=");
+-      str_cats(&response, cvm_fact_domain);
+-    }
++    make_response(&response, cvm_fact_username, cvm_fact_sys_username, cvm_fact_domain);
+     msg4("SASL AUTH ", mechanism, " ", response.s);
+     cvm_client_setenv();
+   }
+-  else
+-    msg3("SASL AUTH ", mechanism, " failed");
++  else if (i == SASL_NO_MECH)
++    msg3("SASL AUTH ", mechanism, " failed: no such mechanism");
++  else {
++    if (sa->state.username.len > 0) {
++      make_response(&response, sa->state.username.s, NULL, sa->state.domain);
++      msg4("SASL AUTH ", mechanism, " failed ", response.s);
++    }
++    else
++      msg3("SASL AUTH ", mechanism, " failed, no username");
++  }
+   str_free(&response);
+   str_free(&response64);
+   str_free(&challenge);
+diff --git a/sasl_cram_md5.c b/sasl_cram_md5.c
+index daf769e..c0d328e 100644
+--- a/sasl_cram_md5.c
++++ b/sasl_cram_md5.c
+@@ -40,6 +40,8 @@ static int response1(struct sasl_state* ss,
+   for (j = 0; j < 32; j += 2)
+     binresp[j/2] = hex2bin[(unsigned char)response->s[i+j]] << 4
+       | hex2bin[(unsigned char)response->s[i+j+1]];
++  if (!str_copys(&ss->username, response->s))
++    return SASL_TEMP_FAIL;
+   return sasl_authenticate_cram(ss, response->s, "CRAM-MD5",
+ 				&ss->init, &binrespstr);
+   (void)challenge;
+diff --git a/sasl_plain.c b/sasl_plain.c
+index c10795a..96000ad 100644
+--- a/sasl_plain.c
++++ b/sasl_plain.c
+@@ -15,6 +15,8 @@ static int response1(struct sasl_state* ss,
+   if ((j = str_findnext(response, 0, i)) == (unsigned)-1)
+     return SASL_RESP_BAD;
+   ++j;
++  if (!str_copyb(&ss->username, response->s + i, j - i - 1))
++    return SASL_TEMP_FAIL;
+   return sasl_authenticate_plain(ss, response->s+i, response->s+j);
+   (void)challenge;
+ }
