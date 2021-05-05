@@ -1,7 +1,0 @@
-*nullmailer-2.0 (22 Jan 2016)
-
-  22 Jan 2016; Bruce Guenter <bruce@gentoo.org> +files/init.d-nullmailer-r4,
-  +files/remotes.sample-2.0, +metadata.xml, +nullmailer-2.0.ebuild,
-  -files/remotes.sample-1.05, -files/remotes.sample-1.10,
-  -nullmailer-1.05-r1.ebuild, -nullmailer-1.11.ebuild, nullmailer-1.13.ebuild:
-  mail-mta/nullmailer: Add ebuild for version 2.0, clean old versions
