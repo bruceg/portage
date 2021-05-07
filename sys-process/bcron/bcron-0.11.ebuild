@@ -1,8 +1,7 @@
-# Copyright 1999-2011 Gentoo Foundation
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI="2"
+EAPI=7
 
 inherit cron eutils toolchain-funcs multilib
 DESCRIPTION="A new cron system designed with secure operations in mind by Bruce Guenter"
@@ -24,9 +23,9 @@ RDEPEND="${DEPEND}
 
 CRON_SYSTEM_CRONTAB="yes"
 
-src_prepare() {
-	epatch "${FILESDIR}/bcron-0.09-fix-socket-permissions.patch"
-}
+PATCHES=(
+	"${FILESDIR}"/bcron-0.09-fix-socket-permissions.patch
+)
 
 src_configure() {
 	echo '/usr/bin' > conf-bin
@@ -36,7 +35,7 @@ src_configure() {
 }
 
 src_install() {
-	einstall install_prefix=${D} || die
+	make install install_prefix="${D}" || die
 
 	#fix permissions of crontab
 	fperms o-rwx /usr/bin/bcrontab
